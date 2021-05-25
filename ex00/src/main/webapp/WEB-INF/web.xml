@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+<!-- <web-app version="4.0" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	https://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"> -->
+	
+	<web-app version="4.0" xmlns="http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_4_0.xsd">
+	
+	<!-- 스프링 UTF-8 인코딩 필터(한글처리) --> 
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>
+            org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    <!--<servlet-name>appServlet</servlet-name> -->
+    </filter-mapping>
+<!-- 아래는 아파치의 UTF-8 인코딩 필더입니다 -->
+<!--
+ 	<filter>
+		<filter-name>CharacterEncoding</filter-name>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
 
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+
+    <!-- Spring-Security가 사용하는 Filter: DelegatingFilterProxy -->
+    <!-- 이 필터는 모든 요청을 가로채는 필더입니다 
+         - 이 Filter를 이용하면 Spring이 요청을 가로채서 해당 사용자의 인증, 권한을 알아서 확인해준다.
+            o 사용자가 입력한 정보와 DB에 저장되어 있는 정보를 비교한 후 알아서 인증, 권한을 확인한다.
+            o 단, App마다 달라지는 부분은 개발자가 알아서 프로그램을 작성하여 처리해야 합니다.
+    -->
+    <!-- 
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+	<filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>	
+    </filter-mapping>
+	 -->
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
