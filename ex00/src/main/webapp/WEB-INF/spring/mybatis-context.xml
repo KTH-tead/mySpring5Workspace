@@ -59,15 +59,15 @@ class="org.apache.ibatis.datasource.pooled.PooledDataSource">
 -->
 <!-- [방법2] JDBC 정보를 jdbc.properties 파일에서 읽어 들여 dataSource 빈 구성 -->
 <!-- 2-1. jdbc.properties 파일에서 읽어 들이는 PropertyPlaceholderConfigurer 클래스 빈 설정 -->
-<!-- <context:property-placeholder location="/WEB-INF/jdbcConfig/jdbc.properties"/> -->
-<!-- <context:property-placeholder location="classpath:jdbcConfig/jdbc.properties"/> -->
+	<!-- <context:property-placeholder location="/WEB-INF/jdbcConfig/jdbc.properties"/> -->
+	<!-- <context:property-placeholder location="classpath:jdbcConfig/jdbc.properties"/> -->
 <!-- 2-2. PropertyPlaceholderConfigurer 클래스 빈을 통해 읽어 들인 JDBC 정보로 dataSource 빈 구성 -->
 <!--
 <bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
-<property name="driver" value="${jdbcIbatis.driverClassName}" />
-<property name="url" value="${jdbcIbatis.url}" />
-<property name="username" value="${jdbcIbatis.username}" />
-<property name="password" value="${jdbcIbatis.password}" />
+	<property name="driver" value="${jdbcIbatis.driverClassName}" />
+	<property name="url" value="${jdbcIbatis.url}" />
+	<property name="username" value="${jdbcIbatis.username}" />
+	<property name="password" value="${jdbcIbatis.password}" />
 </bean>
 -->
 <bean id="sqlSessionFactory"
