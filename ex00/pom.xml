@@ -152,11 +152,11 @@
 </dependency>
 
 <!-- 새로 추가: lombok -->
-<!-- <dependency>
+<dependency>
     <groupId>org.projectlombok</groupId>
     <artifactId>lombok</artifactId>
-    <version>1.18.18</version>
-</dependency> -->
+    <version>1.18.20</version>
+</dependency>
 
 <!-- 새로 추가: spring-test  -->
 <dependency>
