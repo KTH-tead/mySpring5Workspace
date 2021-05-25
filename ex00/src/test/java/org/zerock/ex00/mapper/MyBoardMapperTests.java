@@ -1,30 +1,36 @@
-package com.spring5212.mypro00.mapper;
+package org.zerock.ex00.mapper;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/mybatis-context.xml")
 // Java Config
 // @ContextConfiguration(classes = {com.spring5212.config.MybatisConfig.class} )
-//@Log4j
+
+
+@Log4j
 public class MyBoardMapperTests {
 
 	@Setter(onMethod_ = @Autowired)
 	private MyBoardMapper myBoardMapper;
 
+	
+	
 //게시물 목록 조회 테스트1 <--테스트 후, 메서드 주석처리
-//	@Test
-//	public void testSelectBoardList() {
-//
-//		//myBoardMapper.selectMyBoardList().forEach(myBoard -> log.info(myBoard));
-//		myBoardMapper.selectMyBoardList().forEach(myBoard -> System.out.println(myBoard));
-//
-//	}
+@Test
+	public void testSelectBoardList() {
+
+		myBoardMapper.selectMyBoardList().forEach(myBoard -> log.info(myBoard));
+		//myBoardMapper.selectMyBoardList().forEach(myBoard -> System.out.println(myBoard));
+
+	}
 
 //게시물 목록 조회 테스트2 - 페이징 고려 
 //	@Test
