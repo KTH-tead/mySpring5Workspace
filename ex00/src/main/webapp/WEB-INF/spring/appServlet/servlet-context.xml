@@ -25,6 +25,6 @@
 	<!-- <context:component-scan base-package="org.zerock.ex00" /> -->
 	<context:component-scan base-package="org.zerock.ex00.service" />
 	<context:component-scan base-package="org.zerock.ex00.Controller" />
-	<context:component-scan base-package="practice.controller.chap06" />
+	<context:component-scan base-package="practice.controller" />
 	
 </beans:beans>
