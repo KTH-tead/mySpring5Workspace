@@ -1,17 +1,23 @@
 @font-face {
-  font-family: 'icomoon';
-  src: url("../fonts/icomoon/icomoon.eot?srf3rx");
-  src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
+  font-family: 'NanumGothicCoding-Regular';
+  src: url("../fonts/NanumGothicCoding-Regular.ttf");
+  src: url("../fonts/NanumGothicCoding-Regular.ttf") format("truetype");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+  font-family: 'NanumGothicCoding-Bold';
+  src: url("../fonts/NanumGothicCoding-Bold.ttf");
+  src: url("../fonts/NanumGothicCoding-Bold.ttf") format("truetype");
+  font-weight: Bold;
+  font-style: normal;
+}
 
 /* =======================================================
 *
-* 	Template Style 
+* 	Template Style
 *
 * ======================================================= */
 body {
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: "NanumGothicCoding-Regular",  sans-serif;
   font-weight: 300;
   font-size: 14px;
   line-height: 1.7;
@@ -43,6 +49,7 @@ body {
       content: ""; }
 
 a {
+  font-family: "NanumGothicCoding-Regular",  sans-serif;
   color: #FFC300;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
@@ -57,10 +64,14 @@ p {
 
 h1, h2, h3, h4, h5, h6, figure {
   color: #000;
-  font-family: "Roboto", Arial, sans-serif;
+  font-family: "NanumGothicCoding-Regular", Arial, sans-serif;
   font-weight: 400;
   margin: 0 0 20px 0; }
 
+  .nanum-bold {
+    font-family: "NanumGothicCoding-Bold", Arial, sans-serif;
+    font-weight: 600;
+  }
 ::-webkit-selection {
   color: #fff;
   background: #FFC300; }

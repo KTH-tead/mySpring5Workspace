@@ -1,15 +1,20 @@
-/**
-* Template Name: Tempo - v4.2.0
-* Template URL: https://bootstrapmade.com/tempo-free-onepage-bootstrap-theme/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
+@font-face {
+  font-family: 'NanumGothicCoding-Regular';
+  src: url("../fonts/NanumGothicCoding-Regular.ttf");
+  src: url("../fonts/NanumGothicCoding-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'NanumGothicCoding-Bold';
+  src: url("../fonts/NanumGothicCoding-Bold.ttf");
+  src: url("../fonts/NanumGothicCoding-Bold.ttf") format("truetype");
+  font-weight: Bold;
+  font-style: normal;
+}
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "NanumGothicCoding-Regular", sans-serif;
   color: #444444;
 }
 
@@ -24,7 +29,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Nunito", sans-serif;
+  font-family: "NanumGothicCoding-Regular", sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -37,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #e43c5c;
+  background: black;
   width: 40px;
   height: 40px;
   border-radius: 50px;
@@ -123,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "Poppins", sans-serif;
+  font-family: "NanumGothicCoding-Bold", sans-serif;
   color: #fff;
   font-size: 15px;
   padding: 0 4px;
@@ -334,8 +339,8 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
-  background: url("../img/market.jpg") top center;
+  height: 80vh;
+  background: url("../img/market.webp") top center;
   background-size: cover;
   position: relative;
 }
@@ -389,7 +394,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-get-started {
-  font-family: "Poppins", sans-serif;
+  font-family: "NanumGothicCoding-Regular", sans-serif;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 20px;
@@ -438,7 +443,7 @@ h1, h2, h3, h4, h5, h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 10vh 0;
   overflow: hidden;
 }
 
@@ -658,7 +663,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.8)), url("../img/cta-bg.jpg") center center;
+  background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.8)), url("../img/desk.jpg") center center;
   background-size: cover;
   padding: 60px 0;
 }
@@ -1889,6 +1894,7 @@ section {
   padding: 10px 0;
   display: flex;
   align-items: center;
+  /* justify-content: center; */
 }
 
 #footer .footer-top .footer-links ul li:first-child {
@@ -1964,7 +1970,7 @@ section {
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #e43c5c;
+  background: black;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -1977,7 +1983,8 @@ section {
 }
 
 #footer .social-links a:hover {
-  background: #d01d3f;
+  background: #FFC300;
   color: #fff;
   text-decoration: none;
 }
+
