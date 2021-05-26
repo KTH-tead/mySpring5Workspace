@@ -16,5 +16,5 @@ public class MyBoardVO {
 	private int breplyCnt ;
 	private int bdelFlag ;
 	private Date bregDate ;
-	private Timestamp bmoDate ;
+	private Timestamp bmodDate ;
 }

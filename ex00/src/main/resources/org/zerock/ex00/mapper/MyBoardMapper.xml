@@ -58,5 +58,10 @@
 		bmodDate = DEFAULT
 		WHERE bno = #{bno} <!-- AND bdelFlag = 0 -->
 	</update>
+	<update id="updateBviewsCnt">
+		UPDATE book_ex.tbl_myboard
+		SET bviewsCnt = bviewsCnt +1
+		WHERE bno = #{bno}
+	</update>
 	
 </mapper>

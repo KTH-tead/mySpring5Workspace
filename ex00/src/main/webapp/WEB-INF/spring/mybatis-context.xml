@@ -81,7 +81,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:org/zerock/ex00/mapper/MyBoardMapper.xml</value>
-				<!-- <value>classpath:com/spring5212/mypro00/mapper/MyMemberMapper.xml</value> -->
+				<!--  <value>classpath:com/spring5212/mypro00/mapper/MyMemberMapper.xml</value> 	 -->
 			</list>	
 		</property>
 	</bean>

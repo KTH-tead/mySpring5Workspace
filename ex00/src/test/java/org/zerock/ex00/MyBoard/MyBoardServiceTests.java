@@ -1,4 +1,6 @@
-package com.spring5212.mypro00.MyBoard;
+package org.zerock.ex00.MyBoard;
+
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import com.spring5212.mypro00.common.paging.MyBoardPagingDTO;
-import com.spring5212.mypro00.service.MyBoardService;
+import org.zerock.ex00.domain.MyBoardVO;
+/*import org.zerock.ex00.common.paging.MyBoardPagingDTO;*/
+import org.zerock.ex00.service.MyBoardService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -39,25 +41,26 @@ public class MyBoardServiceTests {
 ////		this.myBoardService = myBoardService;
 ////	}
 //	
+	
 //	//MyBoardService 빈 생성 유무 확인 테스트
 //	@Test
 //	public void testMyBoardServiceExist() {
 //
-//		log.info(myBoardService);
+//		log.info("myBoardService 빈 생성확인:"+myBoardService );
 //		assertNotNull(myBoardService);
 //	}
-//
+
 	//게시물 목록 조회 서비스 테스트
 	@Test
 	public void testGetBoardList() {
 		//페이징 고려 안함
-		//myBoardService.getBoardList().forEach(myBoard -> log.info(myBoard));
+		myBoardService.getBoardList().forEach(myBoard -> log.info(myBoard));
 		
 		//페이징 고려
-		myBoardService.getBoardList(new MyBoardPagingDTO(2, 10)).forEach(myBoard -> log.info(myBoard));
+		//myBoardService.getBoardList(new MyBoardPagingDTO(2, 10)).forEach(myBoard -> log.info(myBoard));
 	}
-//
-//	
+
+	
 //	//게시물 등록: selectKey 이용 테스트
 //	@Test
 //	public void testRegisterBoard() {
@@ -96,10 +99,14 @@ public class MyBoardServiceTests {
 //	@Test
 //	public void testSetBoardDeleted() {
 //		// 게시물 번호의 존재 여부를 확인하고 테스트할 것
-//		log.info("수행결과: " + myBoardService.setBoardDeleted(7L));
-//		log.info("수행결과: " + myBoardService.setBoardDeleted(8L));
-//		log.info(myBoardService.getBoard(7L));
-//		log.info(myBoardService.getBoard(8L));
+//		log.info("수행결과: " + myBoardService.setBoardDeleted(17L));
+//		log.info("수행결과: " + myBoardService.setBoardDeleted(18L));
+//		log.info("수행결과: " + myBoardService.setBoardDeleted(22L));
+//		log.info("수행결과: " + myBoardService.setBoardDeleted(23L));
+//		log.info(myBoardService.getBoard(17L));
+//		log.info(myBoardService.getBoard(18L));
+//		log.info(myBoardService.getBoard(18L));
+//		log.info(myBoardService.getBoard(18L));
 //	}
 //	
 //	//게시물 삭제  테스트- By 관리자: 실제 삭제 발생

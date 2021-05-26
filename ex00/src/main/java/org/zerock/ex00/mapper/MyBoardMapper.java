@@ -32,5 +32,7 @@ public interface MyBoardMapper {
 	//게시물 수정
 	public int updateMyBoard(MyBoardVO myBoard);
 
+	//게시물 조회
+	public void updateBviewCnt(Long bno);
 	
 }
