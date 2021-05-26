@@ -3,16 +3,13 @@ package org.zerock.ex00.domain;
 import java.sql.Timestamp;
 import java.util.Date;
 
-//import org.springframework
-
 import lombok.Data;
 
-//@component
-//@data
-
+@Data
 public class MyBoardVO {
+	
 	private long bno;
-	private String bittle ;
+	private String btitle ;
 	private String bcontent ;
 	private String bwriter ;
 	private int bviewsCnt ;
