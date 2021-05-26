@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Tempo Bootstrap Template - Index</title>
+  <title>All Things(만물상회)</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,6 +26,11 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/style1.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <!-- Icomoon Icon Fonts-->
+  <link rel="stylesheet" href="assets/css/icomoon.css">
 
   <!-- =======================================================
   * Template Name: Tempo - v4.2.0
@@ -41,19 +46,23 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">Tempo</a></h1>
+      <h1 class="col-2 logo">
+        <a class="img-fluid" href="index.html">
+          <img src="assets/img/logoKrH.png" alt="" class="w-100">
+        </a>
+      </h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto active" href="#">Home</a></li>
+          <li><a class="nav-link scrollto" href="#">Products Upload</a></li>
+          <li><a class="nav-link scrollto" href="#">Products</a></li>
+          <li><a class="nav-link scrollto " href="#">Login</a></li>
+          <li><a class="nav-link scrollto" href="#">마이페이지</a></li>
+          <li><a href="blog.html">관리자</a></li>
+          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -70,7 +79,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li> -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -81,10 +90,10 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <h3>Welcome to <strong>Tempo</strong></h3>
-      <h1>We're Creative Agency</h1>
-      <h2>We are team of talented designers making websites with Bootstrap</h2>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+      <h3>Welcome to <strong>올띵스</strong></h3>
+      <h2 class="mb-0">당신에겐 당장 필요치 않은 물건이,</h2>
+      <h2 class="mt-1">누군가에겐 당장 필요하다면? </h2>
+      <a href="#" class="btn-get-started scrollto ">올띵스와 함께하세요</a>
     </div>
   </section><!-- End Hero -->
 
@@ -95,30 +104,25 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>About</h2>
-          <h3>Learn More <span>About Us</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+
+          <h3><span>올띵스는?</span></h3>
+          <p class="mb-1">효율성 최고 상품부터, 다양한 이야기 공유까지, <br>모두가 행복해지는 올띵스</p>
+          <p class="mt-1"> </p>
         </div>
 
         <div class="row content">
-          <div class="col-lg-6">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+          <div class="col-lg-2"></div>
+          <div class="col-lg-4 col-6">
+            <p></p>
+            <ul class="justify-content-end" style="top:50px; margin-top: 100px;">
+              <li><i class="ri-check-double-line"></i>최고의 상품을 저렴하게 구매하고 싶나요?</li>
+              <li><i class="ri-check-double-line"></i>집에서 자리만 차지하는 물건을 처분하고 싶나요?</li>
+              <li><i class="ri-check-double-line"></i>다양한 친구와 이야기를 나누고 싶나요?</li>
             </ul>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <a href="#" class="btn-learn-more">Learn More</a>
+            <img src="./assets/img/logoBig.png" alt="" style="height: 30vh;">
+            <!-- <a href="#" class="btn-learn-more">Learn More</a> -->
           </div>
         </div>
 
@@ -128,50 +132,167 @@
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
       <div class="container">
-
         <div class="section-title">
-          <h2>Services</h2>
-          <h3>We do offer awesome <span>Services</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+          <p>전자제품, 책, 의류 등 모든 것들을 찾을 수 있는 올띵스</p>
         </div>
-
         <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+          <div class="col-md-3 text-center">
+            <div class="product-entry">
+              <div class="product-img" style="background-image: url(./assets/images/item-6.jpg);">
+                <p class="tag"><span class="new">New</span></p>
+                <div class="cart">
+                  <p>
+                    <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
+                    <span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
+                    <span><a href="#"><i class="icon-heart3"></i></a></span>
+                    <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="desc">
+                <h3><a href="shop.html">목걸이</a></h3>
+                <p class="price"><span>50,000</span>원</p>
+              </div>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+          <div class="col-md-3 text-center">
+            <div class="product-entry">
+              <div class="product-img" style="background-image: url(./assets/images/item-7.jpg);">
+                <p class="tag"><span class="new">New</span></p>
+                <div class="cart">
+                  <p>
+                    <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
+                    <span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
+                    <span><a href="#"><i class="icon-heart3"></i></a></span>
+                    <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="desc">
+                <h3><a href="shop.html">선글라스</a></h3>
+                <p class="price"><span>20,000</span>원</p>
+              </div>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+          <div class="col-md-3 text-center">
+            <div class="product-entry">
+              <div class="product-img" style="background-image: url(./assets/images/item-8.jpg);">
+                <p class="tag"><span class="new">New</span></p>
+                <div class="cart">
+                  <p>
+                    <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
+                    <span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
+                    <span><a href="#"><i class="icon-heart3"></i></a></span>
+                    <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="desc">
+                <h3><a href="shop.html">트레이닝복</a></h3>
+                <p class="price"><span>30,000</span>원</p>
+              </div>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+          <div class="col-md-3 text-center">
+            <div class="product-entry">
+              <div class="product-img" style="background-image: url(./assets/images/item-9.jpg);">
+                <p class="tag"><span class="new">New</span></p>
+                <div class="cart">
+                  <p>
+                    <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
+                    <span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
+                    <span><a href="#"><i class="icon-heart3"></i></a></span>
+                    <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="desc">
+                <h3><a href="shop.html">남성 정장</a></h3>
+                <p class="price"><span>60,000</span>원</p>
+              </div>
             </div>
           </div>
-
+          <div class="col-md-3 text-center">
+            <div class="product-entry">
+              <div class="product-img" style="background-image: url(./assets/images/item-6.jpg);">
+                <p class="tag"><span class="new">New</span></p>
+                <div class="cart">
+                  <p>
+                    <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
+                    <span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
+                    <span><a href="#"><i class="icon-heart3"></i></a></span>
+                    <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="desc">
+                <h3><a href="shop.html">목걸이</a></h3>
+                <p class="price"><span>50,000</span>원</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="product-entry">
+              <div class="product-img" style="background-image: url(./assets/images/item-7.jpg);">
+                <p class="tag"><span class="new">New</span></p>
+                <div class="cart">
+                  <p>
+                    <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
+                    <span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
+                    <span><a href="#"><i class="icon-heart3"></i></a></span>
+                    <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="desc">
+                <h3><a href="shop.html">선글라스</a></h3>
+                <p class="price"><span>20,000</span>원</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="product-entry">
+              <div class="product-img" style="background-image: url(./assets/images/item-8.jpg);">
+                <p class="tag"><span class="new">New</span></p>
+                <div class="cart">
+                  <p>
+                    <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
+                    <span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
+                    <span><a href="#"><i class="icon-heart3"></i></a></span>
+                    <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="desc">
+                <h3><a href="shop.html">트레이닝복</a></h3>
+                <p class="price"><span>30,000</span>원</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="product-entry">
+              <div class="product-img" style="background-image: url(./assets/images/item-9.jpg);">
+                <p class="tag"><span class="new">New</span></p>
+                <div class="cart">
+                  <p>
+                    <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span>
+                    <span><a href="product-detail.html"><i class="icon-eye"></i></a></span>
+                    <span><a href="#"><i class="icon-heart3"></i></a></span>
+                    <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="desc">
+                <h3><a href="shop.html">남성 정장</a></h3>
+                <p class="price"><span>60,000</span>원</p>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
-    </section><!-- End Services Section -->
+    </section>
+
+    <!-- End Services Section -->
 
     <!-- ======= Features Section ======= -->
     <section id="features" class="features">
