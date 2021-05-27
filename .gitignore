@@ -22,10 +22,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-
-# Created by https://www.toptal.com/developers/gitignore/api/eclipse
-# Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
-
 ### Eclipse ###
 .metadata
 bin/
@@ -96,13 +92,3 @@ local.properties
 pom.properties
 MANIFEST.MF
 Servers/
-
-.idea/
-mybatis-config.xml
-pom.xml
-root-context.xml
-servlet-context.xml
-SpringConfiguration.java
-spring-security.xml
-webxml
-# End of https://www.toptal.com/developers/gitignore/api/eclipse
