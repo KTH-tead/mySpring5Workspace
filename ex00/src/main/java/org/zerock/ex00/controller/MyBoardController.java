@@ -54,28 +54,26 @@ public class MyBoardController {
 	}
 
 
-////게시물 조회-수정 페이지 호출
-//	@GetMapping({ "/detail","modify"})
-//	public void showBoardDetail(@RequestParam("bno") Long bno, Model model) {
-//		log.info("컨트롤러 - 게시물 조회/수정 페이지 호출:" + bno);
-//		model.addAttribute("board", myBoardService.getBoard(bno));
-//		log.info("컨트롤러 - 화면으로 전달함 model:" + model);
-//	}
-	
-////게시물 조회-수정 페이지 호출
-	@GetMapping("/detail")
+//게시물 조회-수정 페이지 호출
+	@GetMapping({ "/detail","modify"})
 	public void showBoardDetail(@RequestParam("bno") Long bno, Model model) {
 		log.info("컨트롤러 - 게시물 조회/수정 페이지 호출:" + bno);
 		model.addAttribute("board", myBoardService.getBoard(bno));
 		log.info("컨트롤러 - 화면으로 전달함 model:" + model);
 	}
 	
-	@GetMapping("modify")
-	public void showBoardModify(@RequestParam("bno") Long bno, Model model) {
-		log.info("컨트롤러 - 게시물 조회/수정 페이지 호출:" + bno);
-		model.addAttribute("board", myBoardService.getBoard(bno));
-		log.info("컨트롤러 - 화면으로 전달함 model:" + model);
-	}
+////게시물 조회-수정 페이지 호출
+	/*
+	 * @GetMapping("/detail") public void showBoardDetail(@RequestParam("bno") Long
+	 * bno, Model model) { log.info("컨트롤러 - 게시물 조회/수정 페이지 호출:" + bno);
+	 * model.addAttribute("board", myBoardService.getBoard(bno));
+	 * log.info("컨트롤러 - 화면으로 전달함 model:" + model); }
+	 * 
+	 * @GetMapping("modify") public void showBoardModify(@RequestParam("bno") Long
+	 * bno, Model model) { log.info("컨트롤러 - 게시물 조회/수정 페이지 호출:" + bno);
+	 * model.addAttribute("board", myBoardService.getBoard(bno));
+	 * log.info("컨트롤러 - 화면으로 전달함 model:" + model); }
+	 */
 	
 ////게시물 수정 처리
 	@PostMapping("/modify")
@@ -89,7 +87,7 @@ public class MyBoardController {
 		}
 		
 		
-		//redirectAttr.addAttribute("bno", myBoard.getBno());
+		redirectAttr.addAttribute("bno", myBoard.getBno());
 		
 		log.info("컨트롤러 - 게시물 수정 처리결과(Boolean):" + myBoardService.modifyBoard(myBoard));
 
@@ -110,6 +108,7 @@ public class MyBoardController {
 		
 		return "redirect:/myboard/list";
 	}
+	
 
 //게시물 삭제 - 특정게시물 삭제 by 관리자 : 실제 삭제 발생
 	@PostMapping("/remove")
@@ -123,6 +122,8 @@ public class MyBoardController {
 		}
 		return "redirect:/myboard/list";
 	}
+	
+	
 
 //게시물 삭제 - 삭제 설정된 모든 게시물 삭제 - BY 관리자 : 실제 삭제 발생
 	@PostMapping("removeAll")
