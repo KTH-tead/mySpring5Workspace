@@ -1,4 +1,4 @@
-package com.spring5212.mypro00.MyBoard;
+package org.zerock.ex00.MyBoard;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,17 +39,17 @@ public class MyBoardControllerTests {
 //테스트 환경 구성-끝
 	
 	//게시물 목록 조회 테스트 
-	@Test
-	public void testShowBoardList() throws Exception {
-	
-		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/myboard/list")
-														.param("pageNum", "2")    //페이징 테스트 시 추가
-														.param("rowAmount", "10") //페이징 테스트 시 추가
-						).andReturn()
-						 .getModelAndView()
-						 .getModelMap());
-	}
+//	@Test
+//	public void testShowBoardList() throws Exception {
 //	
+//		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/myboard/list")
+//														.param("pageNum", "2")    //페이징 테스트 시 추가
+//														.param("rowAmount", "10") //페이징 테스트 시 추가
+//						).andReturn()
+//						 .getModelAndView()
+//						 .getModelMap());
+//	}
+	
 //	//게시물 등록-페이지 호출 테스트
 //	@Test
 //	public void testShowBoardRegisterPage() throws Exception {
@@ -73,8 +73,8 @@ public class MyBoardControllerTests {
 //					   .andReturn().getModelAndView().getViewName();
 //		log.info(resultPage);
 //	}
-//
-//	
+
+	
 //	//게시물 수정 처리
 //	@Test
 //	public void testModifyBoard() throws Exception {
@@ -91,8 +91,8 @@ public class MyBoardControllerTests {
 //
 //		log.info(resultPage);
 //	}
-//	
-//	//게시물 조회-수정 페이지 호출 테스트: /myboard/detail, /myboard/modify 2개 모두 테스트 수행
+	
+	//게시물 조회-수정 페이지 호출 테스트: /myboard/detail, /myboard/modify 2개 모두 테스트 수행
 //	@Test
 //	public void testshowBoardDetail() throws Exception {
 // 
@@ -102,8 +102,30 @@ public class MyBoardControllerTests {
 //						.getModelAndView()
 //						.getModelMap());
 //	}
-//
-//	//게시물 삭제 테스트- By 사용자: 실제 삭제는 안됨: bno를 "4", "5" 로 두 번 수행
+	
+	//게시물 조회-수정 페이지 호출 테스트: /myboard/modify 2개 모두 테스트 수행
+//	@Test
+//	public void testshowBoardDetail() throws Exception {
+// 
+//		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/myboard/modify")
+//													   .param("bno", "1"))
+//						.andReturn()
+//						.getModelAndView()
+//						.getModelMap());
+//	}
+	
+	//게시물 조회-수정 페이지 호출 테스트: /myboard/detail, /myboard/modify 2개 모두 테스트 수행
+//	@Test
+//	public void testshowBoardDetail() throws Exception {
+// 
+//		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/myboard/detail")
+//													   .param("bno", "1"))
+//						.andReturn()
+//						.getModelAndView()
+//						.getModelMap());
+//	}
+
+	//게시물 삭제 테스트- By 사용자: 실제 삭제는 안됨: bno를 "4", "5" 로 두 번 수행
 //	@Test
 //	public void testSetBoardDeleted() throws Exception {
 //
@@ -117,8 +139,8 @@ public class MyBoardControllerTests {
 //
 //		log.info(resultPage);
 //	}
-//	
-//	//게시물 삭제 테스트 - 특정 게시물 삭제  - By 관리자: 실제 삭제 발생
+	
+	//게시물 삭제 테스트 - 특정 게시물 삭제  - By 관리자: 실제 삭제 발생
 //	@Test
 //	public void testRemoveBoard() throws Exception {
 //		//삭제전 데이터베이스에 게시물 번호 확인할 것
@@ -131,8 +153,8 @@ public class MyBoardControllerTests {
 //
 //		log.info(resultPage);
 //	}
-//
-//	//게시물 삭제 테스트 - 삭제 설정된 모든 게시물 삭제  - By 관리자: 실제 삭제 발생
+
+	//게시물 삭제 테스트 - 삭제 설정된 모든 게시물 삭제  - By 관리자: 실제 삭제 발생
 //	@Test
 //	public void testRemoveAllDeletedBoard() throws Exception {
 //
