@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,7 +24,6 @@ public class MyBoardController {
 	private MyBoardService myBoardService;
 
 // 게시물 조회 1
-
 	@GetMapping("/list")
 	public void showBoardList(Model model) {
 		log.info("컨트롤러 - 게시물 조회 ....");
@@ -49,7 +47,7 @@ public class MyBoardController {
 		log.info("등록된 개시물의 bno: " + bno );
 		
 		redirectAttr.addFlashAttribute("result", bno);
-		// addFlashAttribute -> 값 전달 후 사라짐,
+		//addFlashAttribute -> 값 전달 후 사라짐,
 		//addAttribute -> 값 전달 후에도 유지.
 
 		return "redirect:/myboard/list";
@@ -98,11 +96,6 @@ public class MyBoardController {
 		return "redirect:/myboard/detail";
 	}
 	
-
-
-
-	
-
 ////게시물 삭제 - By 사용자 : 실제 삭제는 안됨.
 	@PostMapping("/delete")
 	public String setBoardDeleted(@RequestParam("bno") Long bno, 
