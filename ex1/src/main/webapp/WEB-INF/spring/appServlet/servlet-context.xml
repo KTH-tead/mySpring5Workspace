@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -21,13 +21,13 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-   
+
 	<!-- 톰캣 기동시에 해당 패키지에 @Controller, @Service, @Repository,@Component 이노테이션이   -->
 	<!-- 정의된 클래스들이 DispatcherServlet이 사용하는 컨텍스트 영역에 빈으로 생성됩니다.  -->
 	<!-- <context:component-scan base-package="practice.controller" /> -->
-	<!-- <context:component-scan base-package="org.zerock.ex00" />  -->
-	<context:component-scan base-package="org.zerock.ex00.service" />
-	<context:component-scan base-package="org.zerock.ex00.controller" />
-   
-   
+	<!-- <context:component-scan base-package="org.zerock.ex1" />  -->
+	<context:component-scan base-package="org.zerock.ex1.service" />
+	<context:component-scan base-package="org.zerock.ex1.controller" />
+
+
 </beans:beans>
