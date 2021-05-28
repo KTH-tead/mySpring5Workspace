@@ -49,6 +49,7 @@ public class MyBoardServiceImpl implements MyBoardService {
 		public Long getRowAmountTotal(MyBoardPagingDTO myBoardPagingDTO) {
 		log.info("MyBoardService.getRowAmountTotal()에 전달된 MyBoardPagingDTO: " + myBoardPagingDTO);
 		return myBoardMapper.selectRowAmountTotal(myBoardPagingDTO);
+		//return myBoardMapper.selectRowAmountTotal();
 		}
 		
 		

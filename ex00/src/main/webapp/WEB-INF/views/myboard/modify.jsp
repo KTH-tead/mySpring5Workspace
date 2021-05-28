@@ -54,7 +54,9 @@
 					<button type="button" id="BtnModify" data-oper="modify" class="btn btn-default"> 수정</button>
 					<button type="button" id="BtnRemove" data-oper="remove" class="btn btn-danger"> 삭제</button>
 					<button type="button" id="BtnList" data-oper="list" class="btn btn-info">취소</button>
-					
+					<%-- 추가 --%>
+					<input type='hidden' name='pageNum' value='${myBoardPagingDTO.pageNum}'>
+					<input type='hidden' name='rowAmountPerPage' value='${myBoardPagingDTO.rowAmountPerPage}'>
 				</form>
 					
 					
@@ -70,6 +72,16 @@
 	</div>
 </div>
 
+
+<%-- 상세 페이지 이동-방법2, 3에서 사용되는 form: 목록화면에서 상세 화면 호출 시, 전달할 값들이 저장됨 --%>
+<%-- 	<form id="frmSendValue">
+		<input type='hidden' name='pageNum'
+			value='${pagingCreator.myBoardPagingDTO.pageNum}'> <input
+			type='hidden' name='rowAmountPerPage'
+			value='${pagingCreator.myBoardPagingDTO.rowAmountPerPage}'> <input
+			type='hidden' name='lastPageNum' value='${pagingCreator.lastPageNum}'>
+	</form> --%>
+	
 <script>
 
 //form의 수정/삭제/목록보기 버튼에 따른 동작 제어

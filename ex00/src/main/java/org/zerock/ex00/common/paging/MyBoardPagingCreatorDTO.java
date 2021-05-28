@@ -1,8 +1,10 @@
 package org.zerock.ex00.common.paging;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
+//@Data
 @Getter
 @ToString
 public class MyBoardPagingCreatorDTO {
@@ -13,6 +15,7 @@ public class MyBoardPagingCreatorDTO {
 	private boolean next; // 다음 버튼 표시 여부 결정 변수(true: 표시됨, false: 표시 안됨)
 	private long rowAmountTotal; // 전체 행 개수
 	private int pagingNumCnt; // 화면 하단에 표시할 기본 페이지 번호 개수(10)
+	private int lastPageNum ; //마지막 페이지 번호  추가
 
 	public MyBoardPagingCreatorDTO(long rowAmountTotal, MyBoardPagingDTO myBoardPagingDTO) {
 		this.myBoardPagingDTO = myBoardPagingDTO;
@@ -25,7 +28,8 @@ public class MyBoardPagingCreatorDTO {
 		this.startPagingNum = this.endPagingNum - (this.pagingNumCnt - 1);
 		
 //행 총수를 기준으로 한 실제 마지막 페이지 번호
-		int lastPageNum = (int) (Math.ceil((rowAmountTotal * 1.0) / myBoardPagingDTO.getRowAmountPerPage()));
+		//int 
+		lastPageNum = (int) (Math.ceil((rowAmountTotal * 1.0) / myBoardPagingDTO.getRowAmountPerPage()));
 
 //계산된 끝 페이징 번호가 실제 마지막 페이지 번호보다 크면, endPagingNum 값을 lastPageNum 값으로 대체
 		if (lastPageNum < this.endPagingNum) {

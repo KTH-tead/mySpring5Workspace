@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -67,7 +67,7 @@
 											<a class='move' target="_self" href='<c:out value="${board.bno}" />'>
 											<c:out value="${board.btitle}"/>
 											</a>
-											--%> <c:out value="${board.btitle}"/>
+											--%> <c:out value="${board.btitle}" />
 										</td>
 										<td><c:out value="${board.bwriter}" /></td>
 										<td><fmt:formatDate pattern="yyyy/MM/dd"
@@ -84,24 +84,64 @@
 						</tbody>
 					</table>
 					<!-- /.table-responsive -->
+					<!-- Pagination 시작 -->
+					<div class='pull-right'>
+						<ul class="pagination pagination-sm">
+							<!-- 페이징 버튼 클릭 시, jQuery로 페이지 번호를 전달하도록 a 태그에 전달된 pagingCreator 객체의 필드 지정 -->
+							<c:if test="${pagingCreator.prev}">
+								<li class="paginate_button previous"><a href="1">&laquo;</a>
+									<!-- 맨 앞으로 --></li>
+							</c:if>
+							<c:if test="${pagingCreator.prev}">
+								<li class="paginate_button previous"><a
+									href="${pagingCreator.startPagingNum - 1}">이전</a></li>
+							</c:if>
+							<c:forEach var="pageNum" begin="${pagingCreator.startPagingNum}"
+								end="${pagingCreator.endPagingNum}">
+								<!-- 선택된 숫자의 경우, Bootstrap의 active 클래스 이름 추가 -->
+								<li class="paginate_button">
+								<li
+									class='paginate_button ${pagingCreator.myBoardPagingDTO.pageNum == pageNum ? "active":"" }'>
+									<a href="${pageNum}">${pageNum}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pagingCreator.next}">
+								<li class="paginate_button next"><a
+									href="${pagingCreator.endPagingNum +1}">다음</a></li>
+							</c:if>
+							<c:if test="${pagingCreator.next}">
+								<li class="paginate_button next"><a
+									href="${pagingCreator.lastPageNum}">&raquo;</a> <%-- 맨 마지막으로 --%>
+								</li>
+							</c:if>
+						</ul>
+					</div>
+					<!-- Pagination 끝 -->
+
 					<%-- START 모달 --%>
-<%-- Modal --%>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-     aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">처리결과</h4>
-			</div>
-			<div class="modal-body">처리가 완료되었습니다.</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
-			</div>
-		</div><%-- END .modal-content --%>
-	</div><%-- END .modal-dialog --%>
-</div><%-- END .modal --%>
-<%-- END 모달 --%>
+					<%-- Modal --%>
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">처리결과</h4>
+								</div>
+								<div class="modal-body">처리가 완료되었습니다.</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">확인</button>
+								</div>
+							</div>
+							<%-- END .modal-content --%>
+						</div>
+						<%-- END .modal-dialog --%>
+					</div>
+					<%-- END .modal --%>
+					<%-- END 모달 --%>
+
 				</div>
 				<!-- /.panel-body -->
 			</div>
@@ -110,18 +150,21 @@
 		<!-- /.col-lg-12 -->
 	</div>
 	<%-- 상세 페이지 이동-방법2, 3에서 사용되는 form: 목록화면에서 상세 화면 호출 시, 전달할 값들이 저장됨 --%>
-	<form id="frmSendValue"></form>
+	<form id="frmSendValue">
+		<input type='hidden' name='pageNum'
+			value='${pagingCreator.myBoardPagingDTO.pageNum}'> <input
+			type='hidden' name='rowAmountPerPage'
+			value='${pagingCreator.myBoardPagingDTO.rowAmountPerPage}'> <input
+			type='hidden' name='lastPageNum' value='${pagingCreator.lastPageNum}'>
+	</form>
 
 </div>
 <!-- /#page-wrapper -->
 
 
 
-<%-- (11장: 모달 호출 및 모달을 통한 페이지 이동 문제해결) JQeury 메소드 --%>
-
-
-
 <script>
+<%-- (11장: 모달 호출 및 모달을 통한 페이지 이동 문제해결) JQeury 메소드 --%>
 	//새글 등록 버튼 클릭 이벤트 처리: 게시물 등록 화면 이동//////////////////////////////////
 	$("#btnMoveRegister").on("click", function() {
 		self.location = "${contextPath}/myboard/register";
@@ -155,94 +198,57 @@
 
 						frmSendValue.submit();
 					});
-</script>
+<%-- (11장: 모달 호출 및 모달을 통한 페이지 이동 문제해결) JQeury 메소드 --%>
+	//모달을 통한 뒤로가기 비활성화 코드
 
-<!-- <script type="text/javascript">
-//모달을 통한 뒤로가기 비활성화 코드
-// popstat 이벤트를 처리하는 리스너 추가
-window.addEventListener('popstate', function(event) {
-	history.pushState(null, null, location.href); //
+	/*//수정코드*/
+
+	//popstate 이벤트를 처리하는 리스너 추가 
+	window.addEventListener('popstate', function(event) {
+		history.pushState(null, null, location.href); // 다시 push함으로 뒤로가기 Block
 	})
 
-// 컨트롤러가 전달한 result값을 변수에 저장.
-const result = '<c:out value="${result}"/>';
+	//컨트롤러가 전달한 result 값을 변수에 저장
+	var result = '<c:out value="${result}"/>';
 
-function checkModal(result) {
-	if (result === '' || histroy.state){
-		return;
-	
-	} else if (result === 'successModify'){
-		const myMsg = "글이 수정되었습니다";
-	
-	} else if (result === 'successRemove'){
-		const myMsg = "글이 삭제되었습니다";
-	
-	} else if  (parseInt(result) > 0){
-		const myMsg = "게시글" +parseInt(result) +" 번이 등록되었습니다.";
+	function checkModal(result) {
+		if (result === '' || history.state) {
+			return;
+
+		} else if (result === 'successModify') {
+			var myMsg = "글이 수정되었습니다";
+
+		} else if (result === 'successRemove') {
+			var myMsg = "글이 삭제되었습니다";
+
+		} else if (parseInt(result) > 0) {
+			var myMsg = "게시글 " + parseInt(result) + " 번이 등록되었습니다.";
+		}
+		$(".modal-body").html(myMsg);
+		$("#myModal").modal("show");
+		myMsg = '';
 	}
-	$(".modal-body").html(myMsg);
-	$("#myModal").modal("show");
-	myMsg='';
-	
-	}
-	
-//모달 표시 유무 결정/모달에 표시할 내용 수정/모달 표시 실행 
-$(document).ready(function(){
-	
-	//아래에 선언된 메소드 실행
-	checkModal(result);
-	
-	
-	//현재 목록페이지 URL을 강제로 최근URL로 히스토리 객체에 추가
-	history.pushState(null, null, location.href);
-	
-	
+<%--//페이징 버튼 클릭 이벤트 처리: 폼에 저장된 페이지번호를 클릭한 페이지번호로 변경한 후, 전송////--%>
+	//페이징 화면이동
+	$(".paginate_button a").on("click", function(e) {
+		e.preventDefault(); //a 태그의 동작 막음
+		//alert(" 페이지 클릭함");
+		//폼에 저장된 현재 화면의 페이지번호를 클릭한 페이징 버튼의 페이지번호로 변경
+		frmSendValue.find("input[name='pageNum']").val($(this).attr("href"));
+		frmSendValue.attr("action", "${contextPath}/myboard/list");
+		frmSendValue.attr("method", "get");
+		frmSendValue.submit();
 	});
-	
-</script> -->
-<%-- (11장: 모달 호출 및 모달을 통한 페이지 이동 문제해결) JQeury 메소드 --%>
-<script type="text/javascript">
-//모달을 통한 뒤로가기 비활성화 코드
 
-/*//수정코드*/
+	//모달 표시 유무 결정/모달에 표시할 내용 수정/모달 표시 실행
+	$(document).ready(function() {
 
-//popstate 이벤트를 처리하는 리스너 추가 
-window.addEventListener('popstate', function(event) {    
-	history.pushState(null, null, location.href);	// 다시 push함으로 뒤로가기 Block
-})
+		//아래에 선언된 메소드 실행
+		checkModal(result);
 
-
-//컨트롤러가 전달한 result 값을 변수에 저장
-var result = '<c:out value="${result}"/>';
-
-function checkModal(result) {
-	if (result === ''|| history.state) {
-		return;
-
-	} else if (result === 'successModify'){
-		var myMsg = "글이 수정되었습니다";
-		
-	} else if(result === 'successRemove'){
-		var myMsg = "글이 삭제되었습니다";
-
-	} else if (parseInt(result) > 0) {
-		var myMsg = "게시글 " + parseInt(result) + " 번이 등록되었습니다.";
-	}
-	$(".modal-body").html(myMsg);
-	$("#myModal").modal("show");
-	myMsg='';
-}
-
-//모달 표시 유무 결정/모달에 표시할 내용 수정/모달 표시 실행
-$(document).ready(function() {
-	
-	//아래에 선언된 메소드 실행
-	checkModal(result);
-	
-	//
-	history.pushState(null, null, location.href);
-});	
-
+		//
+		history.pushState(null, null, location.href);
+	});
 </script>
 <%@ include file="../myinclude/myfooter.jsp"%>
 

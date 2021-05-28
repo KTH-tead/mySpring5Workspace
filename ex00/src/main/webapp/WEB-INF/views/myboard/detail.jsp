@@ -62,12 +62,29 @@
 	</div>
 </div>
 
+<%-- 상세 페이지 이동-방법2, 3에서 사용되는 form: 목록화면에서 상세 화면 호출 시, 전달할 값들이 저장됨 --%>
+	<form id="frmSendValue">
+		<input type='hidden' name='pageNum' value='${pagingCreator.myBoardPagingDTO.pageNum}'> 
+		<input type='hidden' name='rowAmountPerPage' value='${pagingCreator.myBoardPagingDTO.rowAmountPerPage}'> 
+		<input type='hidden' name='lastPageNum' value='${pagingCreator.lastPageNum}'>
+	</form>
+	
+	
 <script>
+const frmSendValue = $("#frmSendValue");
+
 $("#BtnMoveModify").on("click", function(){
-	location.href='${contextPath}/myboard/modify?bno=<c:out value="${board.bno}"/>';
+	//location.href='${contextPath}/myboard/modify?bno=<c:out value="${board.bno}"/>';
+	frmSendValue.attr("action", "${contextPath}/myboard/modify");
+	frmSendValue.attr("method", "get");
+	frmSendValue.submit();
 })
 $("#BtnMoveList").on("click",function(){
-	location.href="${contextPath}/myboard/list";
+	//location.href="${contextPath}/myboard/list";
+	frmSendValue.find("#bno").remove();// 목록화면 이동 시, bno 값 삭제
+	frmSendValue.attr("action", "${contextPath}/myboard/list");
+	frmSendValue.attr("method", "get");
+	frmSendValue.submit();
 }) 
 </script>
 <!-- /#page-wrapper -->
