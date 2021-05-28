@@ -37,6 +37,21 @@ public class MyBoardServiceImpl implements MyBoardService {
 	return myBoardMapper.selectMyBoardList(myBoardPagingDTO);
 	}
 	
+	//게시물 총 개수 조회 서비스 - 페이징 시 필요
+//	@Override
+//	public Long getRowAmountTotal(MyBoardPagingDTO myBoardPagingDTO) {
+//	log.info("MyBoardService.getRowAmountTotal()에 전달된 MyBoardPagingDTO: " + myBoardPagingDTO);
+//	return myBoardMapper.selectRowAmountTotal(myBoardPagingDTO);
+//	}
+
+	//게시물 총 개수 조회 서비스 - 페이징 시 필요
+		@Override
+		public Long getRowAmountTotal(MyBoardPagingDTO myBoardPagingDTO) {
+		log.info("MyBoardService.getRowAmountTotal()에 전달된 MyBoardPagingDTO: " + myBoardPagingDTO);
+		return myBoardMapper.selectRowAmountTotal(myBoardPagingDTO);
+		}
+		
+		
 	//게시물 등록:selectKey이용
 	@Override
 	public long registerBoard(MyBoardVO myBoard) {

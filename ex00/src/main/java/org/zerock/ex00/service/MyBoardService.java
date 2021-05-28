@@ -11,7 +11,10 @@ public interface MyBoardService {
 	
 	//게시물 목록 조회 서비스2
 	public List<MyBoardVO> getBoardList(MyBoardPagingDTO myBoardPagingDTO);
-		
+	
+	//게시물 총 개수 조회 서비스 - 페이징 시 필요
+	public Long getRowAmountTotal(MyBoardPagingDTO myBoardPagingDTO);
+	
 	//게시물 등록: selectKey이용
 	public long registerBoard(MyBoardVO myBoard);
 	//게시물 조회: by bno + 조회수 증가 고려
