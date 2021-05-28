@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.ex00.common.paging.MyBoardPagingDTO;
 import org.zerock.ex00.domain.MyBoardVO;
 
 import lombok.Setter;
@@ -36,19 +37,19 @@ public class MyBoardMapperTests {
 	 */
 
 //게시물 목록 조회 테스트2 - 페이징 고려 
-//	@Test
-//	public void testSelectBoardListWithPaging() {
-//		
-//		MyBoardPagingDTO myBoardPagingDTO = new MyBoardPagingDTO(); //기본 생성자 이용(1, 10)
-//
-//		//myBoardPagingDTO.setPageNum(1);
-//		//myBoardPagingDTO.setRowAmountPerPage(10);
-//		myBoardMapper.selectMyBoardList(myBoardPagingDTO).forEach(myBoard -> System.out.println(myBoard));
-//		
-//		myBoardPagingDTO = new MyBoardPagingDTO(2, 10); //2개의 매개변수 생성자
-//		myBoardMapper.selectMyBoardList(myBoardPagingDTO).forEach(myBoard -> System.out.println(myBoard));
-//
-//	}
+	@Test
+	public void testSelectBoardListWithPaging() {
+		
+		MyBoardPagingDTO myBoardPagingDTO = new MyBoardPagingDTO(); //기본 생성자 이용(1, 10)
+
+		//myBoardPagingDTO.setPageNum(1);
+		//myBoardPagingDTO.setRowAmountPerPage(10);
+		myBoardMapper.selectMyBoardList(myBoardPagingDTO).forEach(myBoard -> System.out.println(myBoard));
+		
+		myBoardPagingDTO = new MyBoardPagingDTO(2, 10); //2개의 매개변수 생성자
+		myBoardMapper.selectMyBoardList(myBoardPagingDTO).forEach(myBoard -> System.out.println(myBoard));
+
+	}
 	
 //	@Test
 //	public void testSearchBoardWithPaging() {

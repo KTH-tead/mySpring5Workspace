@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.ex00.common.paging.MyBoardPagingDTO;
 import org.zerock.ex00.domain.MyBoardVO;
 import org.zerock.ex00.service.MyBoardService;
 
@@ -24,12 +25,22 @@ public class MyBoardController {
 	private MyBoardService myBoardService;
 
 // 게시물 조회 1
-	@GetMapping("/list")
-	public void showBoardList(Model model) {
-		log.info("컨트롤러 - 게시물 조회 ....");
-		model.addAttribute("boardList", myBoardService.getBoardList());
-	}
+//	@GetMapping("/list")
+//	public void showBoardList(Model model) {
+//		log.info("컨트롤러 - 게시물 조회 ....");
+//		model.addAttribute("boardList", myBoardService.getBoardList());
+//	}
 
+	//게시물 목록 조회 2 - 페이징 고려
+	//@Override
+	@GetMapping("/list")
+	public void showBoardList(MyBoardPagingDTO myBoardPagingDTO, Model model) {
+	log.info("컨트롤러 - 게시물 목록 조회 시작.....");
+	log.info("컨트롤러에 전달된 사용자의 페이징처리 데이터: " + myBoardPagingDTO);
+	model.addAttribute("boardList", myBoardService.getBoardList(myBoardPagingDTO));
+	log.info("컨트롤러 - 게시물 목록 조회 완료.....");
+	}
+	
 //게시물 등록 - 페이지 호출
 	@GetMapping("/register")
 	public void showBoardRegisterPage() {
@@ -83,7 +94,7 @@ public class MyBoardController {
 		
 		
 		if(myBoardService.modifyBoard(myBoard)) {
-			redirectAttr.addFlashAttribute("result","success");
+			redirectAttr.addFlashAttribute("result","successModify");
 		}
 		
 		
@@ -103,7 +114,7 @@ public class MyBoardController {
 		log.info("컨트롤러 - 게시물 삭제(전달된 MyBoardVO): " +myBoard);
 		
 		if (myBoardService.setBoardDeleted(myBoard.getBno())) {
-			redirectAttr.addFlashAttribute("result","success");
+			redirectAttr.addFlashAttribute("result","successRemove");
 		}
 		
 		return "redirect:/myboard/list";

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.zerock.ex00.common.paging.MyBoardPagingDTO;
 import org.zerock.ex00.domain.MyBoardVO;
 /*import org.zerock.ex00.common.paging.MyBoardPagingDTO;*/
 import org.zerock.ex00.service.MyBoardService;
@@ -54,10 +55,10 @@ public class MyBoardServiceTests {
 	@Test
 	public void testGetBoardList() {
 		//페이징 고려 안함
-		myBoardService.getBoardList().forEach(myBoard -> log.info(myBoard));
+		//myBoardService.getBoardList().forEach(myBoard -> log.info(myBoard));
 		
 		//페이징 고려
-		//myBoardService.getBoardList(new MyBoardPagingDTO(2, 10)).forEach(myBoard -> log.info(myBoard));
+		myBoardService.getBoardList(new MyBoardPagingDTO(2, 10)).forEach(myBoard -> log.info(myBoard));
 	}
 
 	
