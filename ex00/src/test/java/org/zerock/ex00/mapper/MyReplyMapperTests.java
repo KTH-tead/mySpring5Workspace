@@ -29,7 +29,7 @@ public class MyReplyMapperTests {
 //
 //		log.info(myReplyMapper);
 //	}
-//
+
 //	//특정 게시물에 대한 댓글 목록 조회 테스트
 //	@Test
 //	public void testSelectMyReplyList() {
@@ -41,7 +41,7 @@ public class MyReplyMapperTests {
 //		myReplies.forEach(myReply -> System.out.println(myReply));
 //
 //	}
-//	//특정 게시물에 대한 댓글 목록 조회(페이징) 테스트
+	//특정 게시물에 대한 댓글 목록 조회(페이징) 테스트
 @Test
 public void testSelectMyReplyListPaging() {
 
@@ -56,9 +56,9 @@ public void testSelectMyReplyListPaging() {
 
 	myReplies.forEach(myReply -> System.out.println(myReply));
 }
-//
-//
-//
+
+
+
 //	//특정 게시물에 대한 댓글 등록 테스트
 //	@Test
 //	public void testInsertMyReplyForBoard() {

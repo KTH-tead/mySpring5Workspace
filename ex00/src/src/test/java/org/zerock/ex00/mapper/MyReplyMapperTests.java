@@ -24,13 +24,13 @@ public class MyReplyMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private MyReplyMapper myReplyMapper;
 
-//	//매퍼인스턴스 생성 테스트
-//	@Test
-//	public void testMapper() {
-//
-//		log.info(myReplyMapper);
-//	}
-//
+	//매퍼인스턴스 생성 테스트
+	@Test
+	public void testMapper() {
+
+		log.info(myReplyMapper);
+	}
+
 //	//특정 게시물에 대한 댓글 목록 조회 테스트
 //	@Test
 //	public void testSelectMyReplyList() {
@@ -43,20 +43,20 @@ public class MyReplyMapperTests {
 //
 //	}
 //	//특정 게시물에 대한 댓글 목록 조회(페이징) 테스트
-@Test
-public void testSelectMyReplyListPaging() {
-
-	long targetBno = 458752L;
-
-	MyReplyPagingDTO myReplyPagingDTO = new MyReplyPagingDTO(targetBno, 1);
-
-	long totalReplyCnt = myReplyMapper.selectReplyTotalByBno(myReplyPagingDTO);
-	log.info("댓글 총 개수: "+ totalReplyCnt);
-
-	List<MyReplyVO> myReplies = myReplyMapper.selectMyReplyList(myReplyPagingDTO);
-
-	myReplies.forEach(myReply -> System.out.println(myReply));
-}
+//@Test
+//public void testSelectMyReplyListPaging() {
+//
+//	long targetBno = 458752L;
+//
+//	MyReplyPagingDTO myReplyPagingDTO = new MyReplyPagingDTO(targetBno, 1);
+//
+//	long totalReplyCnt = myReplyMapper.selectReplyTotalByBno(myReplyPagingDTO);
+//	log.info("댓글 총 개수: "+ totalReplyCnt);
+//
+//	List<MyReplyVO> myReplies = myReplyMapper.selectMyReplyList(myReplyPagingDTO);
+//
+//	myReplies.forEach(myReply -> System.out.println(myReply));
+//}
 //
 //
 //
