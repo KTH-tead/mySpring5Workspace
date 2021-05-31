@@ -29,43 +29,39 @@ public class MyBoardMapperTests {
 //    }
 
 //    //게시물 목록 조회 테스트2 - 페이징 고려 
-    @Test
-    public void testSelectBoardListWithPaging() {
-		
-        MyBoardPagingDTO myBoardPagingDTO = new MyBoardPagingDTO(); //기본 생성자 이용(1, 10)
-
-        //myBoardPagingDTO.setPageNum(1);
-        //myBoardPagingDTO.setRowAmountPerPage(10);
-        myBoardMapper.selectMyBoardList(myBoardPagingDTO).forEach(myBoard -> System.out.println(myBoard));
-		
-        myBoardPagingDTO = new MyBoardPagingDTO(2, 10); //2개의 매개변수 생성자
-        myBoardMapper.selectMyBoardList(myBoardPagingDTO).forEach(myBoard -> System.out.println(myBoard));
-
-    }
-	
 //    @Test
-//    public void testSearchBoardWithPaging() {
-//	
-//        MyBoardPagingDTO myBoardPagingDTO = new MyBoardPagingDTO(); //기본 생성자 이용(1, 10)
-//        //myBoardPagingDTO.setKeyword("5");
-//        myBoardPagingDTO.setKeyword("용5");
-//        //myBoardPagingDTO.setKeyword("5");
-//	
-//        //myBoardPagingDTO.setScope("T");
-//        //myBoardPagingDTO.setScope("C");
-//        //myBoardPagingDTO.setScope("W");
-//        //myBoardPagingDTO.setScope("TC");
-//        myBoardPagingDTO.setScope("TCW");
-//        //myBoardPagingDTO.setScope("TW");
-//        //myBoardPagingDTO.setScope("CW");
-//	
-//        log.info("행 총 개수: " + myBoardMapper.selectRowAmountTotal(myBoardPagingDTO));
-//	
-//        List<MyBoardVO> list = myBoardMapper.selectMyBoardList(myBoardPagingDTO);
-//        list.forEach(board -> log.info(board));
+//    public void testSelectBoardListWithPaging() {
 //		
-//    }
+//        MyBoardPagingDTO myBoardPagingDTO = new MyBoardPagingDTO(); //기본 생성자 이용(1, 10)
 //
+//        //myBoardPagingDTO.setPageNum(1);
+//        //myBoardPagingDTO.setRowAmountPerPage(10);
+//        myBoardMapper.selectMyBoardList(myBoardPagingDTO).forEach(myBoard -> System.out.println(myBoard));
+//		
+//        myBoardPagingDTO = new MyBoardPagingDTO(2, 10); //2개의 매개변수 생성자
+//        myBoardMapper.selectMyBoardList(myBoardPagingDTO).forEach(myBoard -> System.out.println(myBoard));
+//
+//    }
+	
+    
+	@Test
+	public void testSearchBoardWithPaging() {
+	MyBoardPagingDTO myBoardPagingDTO = new MyBoardPagingDTO(); //기본 생성자 이용(1, 10)
+	//myBoardPagingDTO.setKeyword("5");
+	//myBoardPagingDTO.setKeyword("용5");
+	 //myBoardPagingDTO.setKeyword("5");
+	//myBoardPagingDTO.setScope("T");
+	//myBoardPagingDTO.setScope("C");
+	//myBoardPagingDTO.setScope("W");
+	//myBoardPagingDTO.setScope("TC");
+	//myBoardPagingDTO.setScope("TCW");
+	//myBoardPagingDTO.setScope("TW");
+	//myBoardPagingDTO.setScope("CW");
+	log.info("행 총 개수: " + myBoardMapper.selectRowAmountTotal(myBoardPagingDTO));
+	List<MyBoardVO> list = myBoardMapper.selectMyBoardList(myBoardPagingDTO);
+	list.forEach(board -> log.info(board));
+	}
+
 //    //게시물 등록 테스트 - selectKey 사용않음
 //    @Test
 //    public void testInsertMyBoard() {
