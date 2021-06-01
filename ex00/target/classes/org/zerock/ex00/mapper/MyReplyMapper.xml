@@ -51,17 +51,17 @@ AND #{myReplyPagingDTO.pageNum} * #{myReplyPagingDTO.rowAmountPerPage}
 	<!-- <select id="selectReplyTotalbyBno" resultType="int"> <![CDATA[ SELECT 
 		/*+ INDEX (IDX_MYREPLY_BNO_RNO) */ count(*) FROM book_ex.tbl_myreply WHERE 
 		bno = #{ myReplyPagingDTO.bno} ]]> </select> -->
-			
-<!-- 특정 게시물의 댓글 총 개수확인 -->
 
-     <select id="selectReplyTotalByBno" resultType="int">
+	<!-- 특정 게시물의 댓글 총 개수확인 -->
+
+	<select id="selectReplyTotalByBno" resultType="int">
       <![CDATA[
           SELECT /*+ INDEX (IDX_MYREPLY_BNO_RNO) */ count(*)
           FROM book_ex.tbl_myreply
 		WHERE bno = #{myReplyPagingDTO.bno}
       ]]>
-   </select>  
-   
+	</select>
+
 	<!-- 댓글의 답글 등록 -->
 	<!-- <insert id="insertMyReplyForBoard"> <selectKey keyProperty="rno" order="BEFORE" 
 		resultType="long"> SELECT book_ex.seq_myreply.NEXTVAL FROM dual </selectKey> 
@@ -76,7 +76,8 @@ AND #{myReplyPagingDTO.pageNum} * #{myReplyPagingDTO.rowAmountPerPage}
 		</selectKey>
 		INSERT INTO book_ex.tbl_myreply(bno, rno, rcontent, rwriter, rregDate,
 		rmodDate, prno)
-		VALUES (#{bno}, #{rno}, #{rcontent}, #{rwriter}, DEFAULT, DEFAULT, DEFAULT)
+		VALUES (#{bno}, #{rno}, #{rcontent}, #{rwriter},
+		DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 
 
@@ -89,7 +90,8 @@ AND #{myReplyPagingDTO.pageNum} * #{myReplyPagingDTO.rowAmountPerPage}
 
 		INSERT INTO book_ex.tbl_myreply (bno, rno, rcontetnt, rwiter,
 		rregDate, rmodDate, prno)
-		VALUES (#{bno} #{rno} #{rcontent} #{rwriter},DEFAULT, DEFAULT, DEFAULT, #
+		VALUES (#{bno} #{rno} #{rcontent}
+		#{rwriter},DEFAULT, DEFAULT, DEFAULT, #
 		{prno})
 	</insert>
 

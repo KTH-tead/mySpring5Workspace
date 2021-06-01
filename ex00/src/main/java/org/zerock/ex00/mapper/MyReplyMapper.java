@@ -15,7 +15,7 @@ public interface MyReplyMapper {
 		public List<MyReplyVO> selectMyReplyList(@Param("myReplyPagingDTO") MyReplyPagingDTO myReplyPagingDTO);
 		
 		//특정 게시물의 댓글 총 개수확인
-		public int selectReplyTotalByBno(@Param("myReplyPagingDTO") MyReplyPagingDTO myReplyPagingDTO);
+		public long selectReplyTotalByBno(@Param("myReplyPagingDTO") MyReplyPagingDTO myReplyPagingDTO);
 		
 		//특정 게시물에 대한 댓글 등록
 		public long insertMyReplyForBoard(MyReplyVO myReplyVO);

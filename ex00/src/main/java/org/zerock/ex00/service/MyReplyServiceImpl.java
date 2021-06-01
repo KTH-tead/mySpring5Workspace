@@ -1,6 +1,7 @@
 package org.zerock.ex00.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.zerock.ex00.common.paging.MyReplyPagingCreatorDTO;
 import org.zerock.ex00.common.paging.MyReplyPagingDTO;
@@ -56,10 +57,10 @@ public class MyReplyServiceImpl implements MyReplyService {
 	}
 
 //특정 게시물의 댓글 총 개수확인
-//@Override
-//public long getReplyTotalByBno(MyReplyPagingDTO myReplyPaging) {
-// return myReplyMapper.selectReplyTotalByBno(myReplyPaging);
-//}
+@Override
+public Long getReplyTotalByBno(MyReplyPagingDTO myReplyPaging) {
+ return myReplyMapper.selectReplyTotalByBno(myReplyPaging);
+}
 //특정 게시물에 대한 댓글 등록: rno 반환
 	@Override
 	public long registerReplyForBoard(MyReplyVO myReply) {

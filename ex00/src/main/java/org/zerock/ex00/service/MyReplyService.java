@@ -12,7 +12,7 @@ public interface MyReplyService {
 	public MyReplyPagingCreatorDTO getReplyListByBno(MyReplyPagingDTO myReplyPaging);
 
 	// 특정 게시물의 댓글 총 개수확인
-	// public Long getReplyTotalByBno(MyReplyPagingDTO myReplyPaging);
+	 public Long getReplyTotalByBno(MyReplyPagingDTO myReplyPaging);
 	// 특정 게시물에 대한 댓글 등록: rno 반환
 	public long registerReplyForBoard(MyReplyVO myReply);
 

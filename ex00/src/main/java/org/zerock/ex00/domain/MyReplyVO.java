@@ -2,6 +2,9 @@ package org.zerock.ex00.domain;
 
 import java.sql.Timestamp;
 
+import lombok.Data;
+
+@Data
 public class MyReplyVO {
 
  private long bno;
