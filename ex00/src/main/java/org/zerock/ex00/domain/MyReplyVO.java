@@ -7,13 +7,13 @@ import lombok.Data;
 @Data
 public class MyReplyVO {
 
- private long bno;
- private long rno;
- private String rcontent;
- private String rwriter;
- private Timestamp rregDate;
- private Timestamp rmodDate;
- private long prno;
- private int lvl; //계층쿼리의 level 값을 저장할 필드
+	private long bno;
+	private long rno;
+	private String rcontent;
+	private String rwriter;
+	private Timestamp rregDate;
+	private Timestamp rmodDate;
+	private long prno;
+	private int lvl; //계층 쿼리의 레벨 값을 저장할 필드
 	
 }

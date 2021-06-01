@@ -1,4 +1,4 @@
-package org.zerock.ex00.security;
+package com.spring5212.mypro00.security;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,10 +24,10 @@ public class MemberTests {
 
     @Setter(onMethod_ = @Autowired)
     private PasswordEncoder pwencoder;
-
+  
     @Setter(onMethod_ = @Autowired)
-    private DataSource dataSource;	
-
+    private DataSource dataSource;
+ 
 //    @Setter(onMethod_ = { @Autowired })
 //    private SqlSessionFactory sqlSessionFactory;
 //
@@ -36,14 +36,14 @@ public class MemberTests {
 //
 //        try ( SqlSession session = sqlSessionFactory.openSession();
 //              Connection con = session.getConnection(); ){
-//
+//   
 //            log.info(session);
 //    	      log.info(con);
 //        } catch (Exception e) {
 //            fail(e.getMessage());
 //        }
 //    }
-//
+//  
 //    @Test
 //    public void testConnection() {
 //
@@ -54,8 +54,8 @@ public class MemberTests {
 //        	fail(e.getMessage());
 //        }
 //    }
-//
-//
+//  
+//  
 //
 //    //member 데이터 입력
 //    @Test
@@ -97,36 +97,36 @@ public class MemberTests {
 //        }//end for
 //    }
 //
-    //권한데이터 입력
+    //권한데이터 입력  
     @Test
     public void testInsertAuth() {
 
         String sql = "INSERT INTO book_ex.tbl_mymember_authorities VALUES (?,?)";
-
+    
         for(int i = 100; i < 200; i++) {
-
+      
             Connection con = null;
             PreparedStatement pstmt = null;
-
+      
             try {
                 con = dataSource.getConnection();
                 pstmt = con.prepareStatement(sql);
-
+        
                 if(i <180) {
                     pstmt.setString(1, "user"+i);
                     pstmt.setString(2,"ROLE_USER");
-
+          
                 } else if (i <190) {
                     pstmt.setString(1, "manager"+i);
                     pstmt.setString(2,"ROLE_MEMBER");
-
+          
                 } else {
                     pstmt.setString(1, "admin"+i);
                     pstmt.setString(2,"ROLE_ADMIN");
-
+          
                 }
                     pstmt.executeUpdate();
-
+        
             } catch(Exception e) {
                 e.printStackTrace();
             } finally {

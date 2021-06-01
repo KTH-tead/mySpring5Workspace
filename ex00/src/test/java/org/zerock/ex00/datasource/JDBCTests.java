@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import lombok.extern.log4j.Log4j;
 
-@Log4j	
+@Log4j
 public class JDBCTests {
 
 	static {
@@ -32,7 +32,7 @@ public class JDBCTests {
 			fail(e.getMessage());
 		}
 	}
-
-	//INFO : org.zerock.ex00.jdbcCP.JDBCTests - oracle.jdbc.driver.T4CConnection@631330c
+	
+	//INFO : com.spring5212.mypro00.jdbcCP.JDBCTests - oracle.jdbc.driver.T4CConnection@631330c
 
 }

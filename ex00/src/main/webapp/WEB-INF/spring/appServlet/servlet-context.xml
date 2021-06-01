@@ -10,25 +10,25 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven/>
+	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/resources/**" location="/resources/" /> <!-- webapp 아래 있는 resource 폴더 -->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	<!-- 톰캣기동 시에 해당 패키지에 @Controller, @Service, @Repository, -->
-	<!-- @Component 어노테이션이 -->
-	<!-- 정의된 클래스들이 DispatcherServlet 이 사용하는 컨텍스트 영역에-->
-	<!-- 빈으로 생성됩니다. -->
+
+	<!-- 톰캣 기동 시에 해당 패키지에 @Controller, @Service, @Repository, @Component 어노테이션이 
+	정의된 클래스들이 DispatcherServlet이 사용하는 컨텍스트 영역에 빈으르 생성됨 -->
 	<!-- <context:component-scan base-package="org.zerock.ex00" /> -->
 	<context:component-scan base-package="org.zerock.ex00.service" />
 	<context:component-scan base-package="org.zerock.ex00.controller" />
-	
 	<!-- <context:component-scan base-package="practice.controller" /> -->
+	
+	<!-- DAO 클래스 빈 자동 생성 -->
+	<context:component-scan base-package="org.zerock.ex00.mapperDAO" />
 	
 </beans:beans>

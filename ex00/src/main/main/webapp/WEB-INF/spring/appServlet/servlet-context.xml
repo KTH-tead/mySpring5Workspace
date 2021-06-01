@@ -28,6 +28,8 @@
 	<!-- <context:component-scan base-package="org.zerock.ex00" /> -->
 	<context:component-scan base-package="org.zerock.ex00.service" />
 	<context:component-scan base-package="org.zerock.ex00.controller" />
+	<!-- DAO 클래스 빈 자동 생성 -->
+	<context:component-scan base-package="org.zerock.ex00.mapperDAO" />
 	
 	<!-- <context:component-scan base-package="practice.controller" /> -->
 	

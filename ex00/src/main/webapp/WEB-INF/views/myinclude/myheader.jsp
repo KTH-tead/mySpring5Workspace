@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 
     <title>My Admin Board</title>
 
@@ -28,7 +25,7 @@
     <%-- <link href="${contextPath}/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet"> --%>
 
     <!-- DataTables Responsive CSS -->
-    <%-- <link href="${contextPath}/resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet"> --%>
+	<%--  <link href="${contextPath}/resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet"> --%>
 
     <!-- Custom CSS -->
     <link href="${contextPath}/resources/dist/css/sb-admin-2.css" rel="stylesheet">
@@ -44,9 +41,9 @@
     <![endif]-->
 
     <!-- jQuery -->
-    <%-- <script src="${contextPath}/resources/vendor/jquery/jquery.min.js"></script> --%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+    <%-- <script src="${contextPath}/resources/vendor/jquery/jquery.min.js"></script> --%>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="${contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -54,14 +51,12 @@
     <script src="${contextPath}/resources/vendor/metisMenu/metisMenu.min.js"></script>
 
     <!-- DataTables JavaScript -->
-<%--
-    <script src="${contextPath}/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <%-- <script src="${contextPath}/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="${contextPath}/resources/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="${contextPath}/resources/vendor/datatables-responsive/dataTables.responsive.js"></script>
---%>
+    <script src="${contextPath}/resources/vendor/datatables-responsive/dataTables.responsive.js"></script> --%>
+
     <!-- Custom Theme JavaScript -->
     <script src="${contextPath}/resources/dist/js/sb-admin-2.js"></script>
-
 </head>
 
 <body id="me">
