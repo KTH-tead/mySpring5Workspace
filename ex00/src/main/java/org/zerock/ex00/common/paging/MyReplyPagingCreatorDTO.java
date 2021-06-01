@@ -17,11 +17,12 @@ public class MyReplyPagingCreatorDTO {
 	private int pagingNumCnt; //화면 하단에 표시할 기본 페이지 번호 개수(10)
 	private int lastPageNum ; //마지막 페이지 번호
 	
-	private List<MyReplyVO> replyList;
+	private List<MyReplyVO> replyList;  //답글 목록을 받는 필드 이름
 	
 	public MyReplyPagingCreatorDTO(long replyTotalByBno, MyReplyPagingDTO myReplyPaging, List<MyReplyVO> replyList ) {
 	this.myReplyPaging = myReplyPaging ;
 	this.replyTotalByBno = replyTotalByBno;
+	this.replyList = replyList ;
 	this.pagingNumCnt = 10;
 	
 	//계산된 끝-시작 페이징 번호:

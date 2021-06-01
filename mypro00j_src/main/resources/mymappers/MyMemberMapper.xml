@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring5213.mypro00j.mapper.MyMemberMapper"> <!-- 패키지명이 포함된 인터페이스 이름을 설정합니다. -->
+
+    <resultMap id="authorityMap" type="com.spring5213.mypro00j.domain.MyAuthorityVO">
+        <result property="userid" column="userid" />
+        <result property="authority" column="authority" />
+    </resultMap>
+
+    <resultMap id="memberMap" type="com.spring5213.mypro00j.domain.MyMemberVO">
+        <result property="userid" column="userid" />
+        <result property="userpw" column="userpw" />
+        <result property="userName" column="userName"/>
+        <result property="enabled" column="enabled" />
+        <result property="mregDate" column="mregDate" />
+        <result property="mmodDate" column="mmodDate" />
+        <result property="mdropFlg" column="mdropFlg" />
+        
+        <collection property="authorityList" resultMap="authorityMap" />
+    </resultMap>
+    
+    
+<!-- 회원 등록: 회원 등록 시 회원 권한 추가도 같이 수행 -->
+    <insert id="insertMyMember">
+        INSERT INTO book_ex.tbl_mymember
+        VALUES (#{userid}, #{userpw}, #{userName}, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+    </insert>
+
+<!-- 회원 권한 추가  -->
+    <insert id="insertMyMemAuthority">
+        INSERT INTO book_ex.tbl_mymember_authorities
+        VALUES (#{userid}, #{authority})
+    </insert>
+
+<!-- 회원 수정(암호) -->
+    <update id="updateMyMember">
+        UPDATE book_ex.tbl_mymember
+        SET userpw = #{userpw},
+            mmodDate = DEFAULT
+        WHERE userid = #{userid} <!-- AND mdropFlg = '0' -->
+    </update>
+
+
+<!-- 회원 특정 권한 삭제(By관리자, 권한 변경은 기존 특정 권한 삭제 후, 신규권한 정보 추가  -->
+    <delete id="deleteMyMemAuthority">
+        DELETE FROM book_ex.tbl_mymember_authorities
+        WHERE userid = #{userid} AND authority = #{authority}
+    </delete>
+
+<!-- 회원 탈퇴 요청 처리(By관리자) - 0:탈퇴철회(유지), 1:탈퇴희망 -->
+    <update id="updateSetMdropFlg">
+        UPDATE book_ex.tbl_mymember
+        SET mdropFlg = #{mdropFlg}
+        WHERE userid = #{userid}
+    </update>
+
+<!-- 회원 휴면/정지 상태 전환(By관리자) --><!-- 휴면/정지상태: enabled 0, 휴면/정지 해지 상태: enabled 1 -->
+    <update id="updateSetEnabled">
+        UPDATE book_ex.tbl_mymember
+        SET enabled = #{enabled}
+        WHERE userid = #{userid}<!-- AND mdropFlg = '0' -->
+    </update>
+
+
+<!-- 회원 삭제(By관리자) - DB에서는 회원 삭제 시, DB에서는 회원 권한 정보 자동 삭제-->
+    <delete id="deleteMyMember">
+        DELETE book_ex.tbl_mymember WHERE userid = #{userid} <!-- AND mdropFlg = '1' -->
+    </delete>
+
+
+<!-- 회원 조회 - 특정 회원(스프링 시큐리티도 사용함) - OUTER JOIN을 사용할 이유가 없습니다. -->
+    <select id="selectMyMember" resultMap="memberMap">
+    <![CDATA[
+        SELECT mem.userid,  mem.userpw, mem.username, mem.enabled,
+               mem.mregdate, mem.mmoddate, mem.mdropflg, auth.authority
+        FROM book_ex.tbl_mymember mem INNER JOIN book_ex.tbl_mymember_authorities auth
+                ON mem.userid = auth.userid
+        WHERE mem.userid = #{userid}      
+    ]]><!-- AND mdropFlg = '0' -->
+    </select>
+
+
+<!-- 탈퇴 회원 일괄 삭제 - 탈퇴 요청된 회원  전체 삭제 (관리자 기능) -->
+    <delete id="deleteAllMemberSetDeleted">
+	    DELETE book_ex.tbl_mymember WHERE mdropFlg = '1'
+    </delete>
+
+</mapper>

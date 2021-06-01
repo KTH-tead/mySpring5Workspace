@@ -17,8 +17,8 @@ import org.zerock.ex00.service.MyReplyService;
 
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping(value= {"/replies"})
-@RestController
+@RequestMapping(value = { "/replies" })
+@RestController // 컨트롤러 클래스 내에 메소드들은 JSP 파일을 호출할 수 없습니다.(이유: 데이터만 전달해 주므로)
 @Log4j
 //@AllArgsConstructor
 public class MyReplyController {
@@ -30,16 +30,23 @@ public class MyReplyController {
 		this.myReplyService = myReplyService;
 	}
 	
+	//- 컨트롤러의 매핑 URL 목록
+	//게시물에 대한 댓글 목록 조회: GET /replies/pages/{bno}/{page}
+	//게시물에 대한 댓글 등록(rno 반환):POST /replies/{bno}/new
+	//게시물에 대한 댓글의 댓글 등록: (rno 반환): POST /replies/{bno}/{prno}/new
+	//게시물에 대한 특정 댓글 조회: GET /replies/{bno}/{rno}
+	//게시물에 대한 특정 댓글 수정: PUT:PATCH /replies/{bno}/{rno}
+	//게시물에 대한 특정 댓글 삭제: DELETE: /replies/{bno}/{rno}
+	
 	//게시물에 대한 댓글 목록 조회(페이징2 - 전체 댓글 수 고려)
 	@GetMapping(value = "/pages/{bno}/{page}",
-	produces = {"application/json; charset=UTF-8", "application/xml; charset=UTF-8"})
+			    produces = {"application/json; charset=UTF-8", "application/xml; charset=UTF-8"})
 	public ResponseEntity<MyReplyPagingCreatorDTO> showReplyList(@PathVariable("bno") Long bno,
 													    	     @PathVariable("page") Integer pageNum) {
 		log.info("댓글-컨트롤러 - 댓글 목록 표시 - URI 추출 pageNum : " + pageNum);
 		log.info("댓글-컨트롤러 - 댓글 목록 표시 - URI 추출 bno : " + bno);
 		
 		MyReplyPagingDTO myReplyPaging = new MyReplyPagingDTO(bno, pageNum);
-		log.info("");
 		
 		MyReplyPagingCreatorDTO replyPagingCreator = myReplyService.getReplyListByBno(myReplyPaging);
 		
@@ -50,7 +57,8 @@ public class MyReplyController {
 	
 	//게시물에 대한 댓글 등록 : rno 반환
 	@PostMapping(value = "/{bno}/new",
-			produces = {"text/plain; charset=UTF-8"})
+				 //consumes = {"application/json; charset=UTF-8"},
+				 produces = {"text/plain; charset=UTF-8"})
 	public ResponseEntity<String> registerReplyForBoard(@PathVariable("bno") Long bno,
 														@RequestBody MyReplyVO myReply) {
 		Long registerRno = myReplyService.registerReplyForBoard(myReply);
@@ -58,7 +66,7 @@ public class MyReplyController {
 		return registerRno != null ? new ResponseEntity<>("게시물의 댓글 등록 성공", HttpStatus.OK)
 								   : new ResponseEntity<>("게시물의 댓글 등록 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 	//게시물에 대한 댓글의 답글 등록 :  rno 반환
 	@PostMapping(value = "/{bno}/{prno}/new",
 						consumes = {"application/json; charset=UTF-8"},
@@ -112,17 +120,5 @@ public class MyReplyController {
 				? new ResponseEntity<>("댓글 삭제 성공", HttpStatus.OK)
 				: new ResponseEntity<>("댓글 삭제 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
