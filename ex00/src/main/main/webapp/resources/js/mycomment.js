@@ -35,7 +35,7 @@ var myCommentClsr = (function () {
     });
   }
 
-  /*   //댓글 목록(페이징) - getJSON() 함수 사용
+     //댓글 목록(페이징) - getJSON() 함수 사용
    function getCmtList(bnoAndPage, callback, error) {
       var bno = bnoAndPage.bno;
       var page = bnoAndPage.page || 1;
@@ -56,209 +56,209 @@ var myCommentClsr = (function () {
          }
       });
    }
-   */
+
 
   //댓글 등록
   //게시물에 대한 댓글 등록(rno 반환):POST /replies/{bno}/new
-  function registerCmt(comment, callback, error) {
-    var bno = comment.bno;
+  // function registerCmt(comment, callback, error) {
+  //   var bno = comment.bno;
 
-    console.log("registerCmt() 전달 받은 bno : " + bno);
-    console.log("registerCmt() 함수의 comment 등록 ajax 처리 시작");
+  //   console.log("registerCmt() 전달 받은 bno : " + bno);
+  //   console.log("registerCmt() 함수의 comment 등록 ajax 처리 시작");
 
-    $.ajax({
-      type: "post",
-      url: "/ex00/replies/" + bno + "/new",
-      data: JSON.stringify(comment),
-      contentType: "application/json; charset=UTF-8",
-      //dataType: 'text',
-      success: function (result, status, xhr) {
-        if (callback) {
-          callback(result);
-        }
-      },
-      error: function (xhr, status, er) {
-        if (error) {
-          error(er);
-        }
-      },
-    });
-  }
+  //   $.ajax({
+  //     type: "post",
+  //     url: "/ex00/replies/" + bno + "/new",
+  //     data: JSON.stringify(comment),
+  //     contentType: "application/json; charset=UTF-8",
+  //     //dataType: 'text',
+  //     success: function (result, status, xhr) {
+  //       if (callback) {
+  //         callback(result);
+  //       }
+  //     },
+  //     error: function (xhr, status, er) {
+  //       if (error) {
+  //         error(er);
+  //       }
+  //     },
+  //   });
+  // }
 
   //답글 등록
   //게시물에 대한 댓글의 댓글 등록: (rno 반환): POST /replies/{bno}/{prno}/new
-  function registerReply(reply, callback, error) {
-    var bno = reply.bno;
-    var prno = reply.prno;
+  // function registerReply(reply, callback, error) {
+  //   var bno = reply.bno;
+  //   var prno = reply.prno;
 
-    console.log("registerReply() 전달받은 bno : " + bno);
-    console.log("registerReply() 전달받은 pcno : " + prno);
-    console.log(
-      "registerReply() 함수의 댓글에 대한 답글 등록 ajax 처리 시작..."
-    );
+  //   console.log("registerReply() 전달받은 bno : " + bno);
+  //   console.log("registerReply() 전달받은 pcno : " + prno);
+  //   console.log(
+  //     "registerReply() 함수의 댓글에 대한 답글 등록 ajax 처리 시작..."
+  //   );
 
-    $.ajax({
-      type: "post",
-      url: "/ex00/replies/" + bno + "/" + prno + "/new",
-      data: JSON.stringify(reply),
-      contentType: "application/json; charset=UTF-8",
-      dataType: "text",
-      success: function (result, status, xhr) {
-        if (callback) {
-          callback(result);
-        }
-      },
-      error: function (xhr, status, er) {
-        if (error) {
-          error(er);
-        }
-      },
-    });
-  }
+  //   $.ajax({
+  //     type: "post",
+  //     url: "/ex00/replies/" + bno + "/" + prno + "/new",
+  //     data: JSON.stringify(reply),
+  //     contentType: "application/json; charset=UTF-8",
+  //     dataType: "text",
+  //     success: function (result, status, xhr) {
+  //       if (callback) {
+  //         callback(result);
+  //       }
+  //     },
+  //     error: function (xhr, status, er) {
+  //       if (error) {
+  //         error(er);
+  //       }
+  //     },
+  //   });
+  // }
 
   //댓글 조회
-  function getCmtReply(bnoAndCno, callback, error) {
-    var bno = bnoAndCno.bno;
-    var cno = bnoAncCno.cno;
+  // function getCmtReply(bnoAndCno, callback, error) {
+  //   var bno = bnoAndCno.bno;
+  //   var cno = bnoAncCno.cno;
 
-    console.log("getCmtReply() 전달받은 bno : " + bno);
-    console.log("getCmtReply() 전달받은 cno : " + cno);
-    console.log("getCmtReply() 함수의 특정 댓글에 조회 ajax 처리 시작...");
+  //   console.log("getCmtReply() 전달받은 bno : " + bno);
+  //   console.log("getCmtReply() 전달받은 cno : " + cno);
+  //   console.log("getCmtReply() 함수의 특정 댓글에 조회 ajax 처리 시작...");
 
-    $.get("/ex00/mycomments/" + bno + "/" + cno + ".json", function (result) {
-      if (callback) {
-        callback(result);
-      }
-    }).fail(function (xhr, status, err) {
-      if (error) {
-        error();
-      }
-    });
-  }
+  //   $.get("/ex00/mycomments/" + bno + "/" + cno + ".json", function (result) {
+  //     if (callback) {
+  //       callback(result);
+  //     }
+  //   }).fail(function (xhr, status, err) {
+  //     if (error) {
+  //       error();
+  //     }
+  //   });
+  // }
 
   //댓글 수정
-  function modifyCmtReply(comment, callback, error) {
-    var bno = comment.bno;
-    var cno = comment.cno;
+  // function modifyCmtReply(comment, callback, error) {
+  //   var bno = comment.bno;
+  //   var cno = comment.cno;
 
-    console.log("modifyCmtReply() 전달받은 bno : " + bno);
-    console.log("modifyCmtReply() 전달받은 cno : " + cno);
-    console.log("modifyCmtReply() 함수의 특정 댓글 수정 ajax 처리 시작...");
+  //   console.log("modifyCmtReply() 전달받은 bno : " + bno);
+  //   console.log("modifyCmtReply() 전달받은 cno : " + cno);
+  //   console.log("modifyCmtReply() 함수의 특정 댓글 수정 ajax 처리 시작...");
 
-    $.ajax({
-      type: "put",
-      url: "/ex00/mycomments/" + bno + "/" + cno,
-      data: JSON.stringify(comment),
-      contentType: "application/json; charset=UTF-8",
-      dataType: "text",
-      success: function (modifyResult, status, xhr) {
-        if (callback) {
-          callback(modifyResult);
-        }
-      },
-      error: function (xhr, status, er) {
-        if (error) {
-          error(er);
-        }
-      },
-    });
-  }
+  //   $.ajax({
+  //     type: "put",
+  //     url: "/ex00/mycomments/" + bno + "/" + cno,
+  //     data: JSON.stringify(comment),
+  //     contentType: "application/json; charset=UTF-8",
+  //     dataType: "text",
+  //     success: function (modifyResult, status, xhr) {
+  //       if (callback) {
+  //         callback(modifyResult);
+  //       }
+  //     },
+  //     error: function (xhr, status, er) {
+  //       if (error) {
+  //         error(er);
+  //       }
+  //     },
+  //   });
+  // }
 
   //댓글 삭제(cdelFlg만 1로 수정)
-  function setCmtReplyDeleted(comment, callback, error) {
-    var bno = comment.bno;
-    var cno = comment.cno;
-    var cwriter = comment.cwriter;
+  // function setCmtReplyDeleted(comment, callback, error) {
+  //   var bno = comment.bno;
+  //   var cno = comment.cno;
+  //   var rwriter = comment.rwriter;
 
-    console.log("modifyCmtReply() 전달받은 bno : " + bno);
-    console.log("modifyCmtReply() 전달받은 cno : " + cno);
-    console.log("modifyCmtReply() 함수의 댓글-답글 삭제1 ajax 처리 시작...");
+  //   console.log("modifyCmtReply() 전달받은 bno : " + bno);
+  //   console.log("modifyCmtReply() 전달받은 cno : " + cno);
+  //   console.log("modifyCmtReply() 함수의 댓글-답글 삭제1 ajax 처리 시작...");
 
-    $.ajax({
-      type: "patch",
-      url: "/ex00/mycomments/" + bno + "/" + cno,
-      data: JSON.stringify(comment),
-      contentType: "application/json; charset=UTF-8",
-      dataType: "text",
-      success: function (modifyResult, status, xhr) {
-        if (callback) {
-          callback(modifyResult);
-        }
-      },
-      error: function (xhr, status, er) {
-        if (error) {
-          error(er);
-        }
-      },
-    });
-  }
+  //   $.ajax({
+  //     type: "patch",
+  //     url: "/ex00/mycomments/" + bno + "/" + cno,
+  //     data: JSON.stringify(comment),
+  //     contentType: "application/json; charset=UTF-8",
+  //     dataType: "text",
+  //     success: function (modifyResult, status, xhr) {
+  //       if (callback) {
+  //         callback(modifyResult);
+  //       }
+  //     },
+  //     error: function (xhr, status, er) {
+  //       if (error) {
+  //         error(er);
+  //       }
+  //     },
+  //   });
+  // }
 
   //댓글 삭제(실제 삭제)
-  function removeCmtReply(comment, callback, error) {
-    var bno = comment.bno;
-    var cno = comment.cno;
-    var cwriter = comment.cwriter;
+  // function removeCmtReply(comment, callback, error) {
+  //   var bno = comment.bno;
+  //   var cno = comment.cno;
+  //   var rwriter = comment.rwriter;
 
-    console.log("removeCmtReply() 전달받은 bno : " + bno);
-    console.log("removeCmtReply() 전달받은 cno : " + cno);
-    console.log("removeCmtReply() 전달받은 cwriter : " + cwriter);
-    console.log("removeCmtReply() 함수의 댓글 삭제 ajax 처리 시작...");
+  //   console.log("removeCmtReply() 전달받은 bno : " + bno);
+  //   console.log("removeCmtReply() 전달받은 cno : " + cno);
+  //   console.log("removeCmtReply() 전달받은 rwriter : " + rwriter);
+  //   console.log("removeCmtReply() 함수의 댓글 삭제 ajax 처리 시작...");
 
-    $.ajax({
-      type: "delete",
-      url: "/ex00/mycomment/" + bno + "/" + cno,
-      data: JSON.stringify({ bno: bno, cno: cno, cwriter: cwriter }),
-      contentType: "application/json; charset=UTF-8",
-      success: function (removeResult, status, xhr) {
-        if (callback) {
-          callback(removeResult);
-        }
-      },
-      error: function (xhr, status, er) {
-        if (error) {
-          error(er);
-        }
-      },
-    });
-  }
+  //   $.ajax({
+  //     type: "delete",
+  //     url: "/ex00/mycomment/" + bno + "/" + cno,
+  //     data: JSON.stringify({ bno: bno, cno: cno, rwriter: rwriter }),
+  //     contentType: "application/json; charset=UTF-8",
+  //     success: function (removeResult, status, xhr) {
+  //       if (callback) {
+  //         callback(removeResult);
+  //       }
+  //     },
+  //     error: function (xhr, status, er) {
+  //       if (error) {
+  //         error(er);
+  //       }
+  //     },
+  //   });
+  // }
 
   //날짜 시간 표시 형식 설정(서버와 상관없음)
   //일반적인 날짜 시간 표시 형식으로 표시
-  function showDatetime(datatimeValue) {
-    var dateObj = new Date(datetimeValue);
+  // function showDatetime(datatimeValue) {
+  //   var dateObj = new Date(datetimeValue);
 
-    var str = "";
+  //   var str = "";
 
-    var yyyy = dateObj.getFullYear();
-    var mm = dataObj.getMonth();
-    var dd = dateObj.getDate();
+  //   var yyyy = dateObj.getFullYear();
+  //   var mm = dataObj.getMonth();
+  //   var dd = dateObj.getDate();
 
-    var hh = dateObj.getHours();
-    var mi = dateObj.getMinutes();
-    var ss = dateObj.getSeconds();
+  //   var hh = dateObj.getHours();
+  //   var mi = dateObj.getMinutes();
+  //   var ss = dateObj.getSeconds();
 
-    str = [
-      yyyy,
-      "/",
-      (mm > 9 ? "" : "0") + mm,
-      "/",
-      (dd > 9 ? "" : "0") + dd,
-      " ",
-      (hh > 9 ? "" : "0") + hh,
-      ":",
-      (mi > 9 ? "" : "0") + mi,
-      ":",
-      (ss > 9 ? "" : "0") + ss,
-      "/",
-    ].join("");
+  //   str = [
+  //     yyyy,
+  //     "/",
+  //     (mm > 9 ? "" : "0") + mm,
+  //     "/",
+  //     (dd > 9 ? "" : "0") + dd,
+  //     " ",
+  //     (hh > 9 ? "" : "0") + hh,
+  //     ":",
+  //     (mi > 9 ? "" : "0") + mi,
+  //     ":",
+  //     (ss > 9 ? "" : "0") + ss,
+  //     "/",
+  //   ].join("");
 
-    return str;
-  }
+  //   return str;
+  // }
 
   return {
     getCmtList: getCmtList, //댓글 목록
     registerCmt: registerCmt, //댓글 등록
-    registerReply: registerReply, //, //답글 등록
+    //registerReply: registerReply, //, //답글 등록
     //         getCmtReply : getCmtReply, //댓글-답글 조회
     //         ModifyCmtReply : ModifyCmtReply, //댓글-답글 수정
     //         setCmtReplyDeleted : setCmtReplyDeleted, //댓글-답글 삭제(cdelFlg-1 수정)
