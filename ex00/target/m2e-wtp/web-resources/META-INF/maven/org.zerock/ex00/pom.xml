@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>org.zerock</groupId>
-   <artifactId>ex00</artifactId>
-   <name>ex00</name>
-   <packaging>war</packaging>
-   <version>1.0.0-BUILD-SNAPSHOT</version>
-       <properties>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.zerock</groupId>
+	<artifactId>ex00</artifactId>
+	<name>ex00</name>
+	<packaging>war</packaging>
+	<version>1.0.0-BUILD-SNAPSHOT</version>
+    <properties>
         <java-version>1.8</java-version>
             <org.springframework-version>5.2.13.RELEASE</org.springframework-version>
             <org.aspectj-version>1.9.6</org.aspectj-version><!--1.6.10->1.9.6 -->
@@ -96,7 +96,7 @@
 </dependency>
 
 <!-- 새로 추가: log4jdbc-log4j2 -->
-<!-- log4jdbc-log4j2-jdbc4 사용 시: Driver does not support get/set network timeout
+<!-- log4jdbc-log4j2-jdbc4 사용 시: Driver does not support get/set network timeout 
                                        for connections.경고 메시지 표시됨. -->
 <!-- log4jdbc-log4j2-jdbc4.1 사용 시: 경고 메시지 표시 안 됨 -->
 <dependency>
@@ -126,7 +126,7 @@
 
 <!-- 새로 추가: ojdbc6: Oracle JDBC Driver compatible with JDB6 ~ 8 -->
 <!-- 접속하려는 오라클 데이터베이스의 버전에 해당하는 드라이버를 사용하는 것을 권장 -->
-<!--
+<!-- 
 <dependency>
     <groupId>com.oracle.database.jdbc</groupId>
     <artifactId>ojdbc6</artifactId>
@@ -160,9 +160,9 @@
 
 <!-- 새로 추가: spring-test  -->
 <dependency>
-   <groupId>org.springframework</groupId>
-   <artifactId>spring-test</artifactId>
-   <version>${org.springframework-version}</version>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-test</artifactId>
+	<version>${org.springframework-version}</version>
 </dependency>
 
 
@@ -184,14 +184,14 @@
         <artifactId>spring-webmvc</artifactId>
         <version>${org.springframework-version}</version>
     </dependency>
-
-    <!-- AspectJ : AOP 사용시 필요 -->
+    
+    <!-- AspectJ : AOP 사용시 필요-->
     <dependency>
         <groupId>org.aspectj</groupId>
         <artifactId>aspectjrt</artifactId>
         <version>${org.aspectj-version}</version>
     </dependency>
-
+    
     <!-- Logging -->
     <dependency>
         <groupId>org.slf4j</groupId>
@@ -240,7 +240,7 @@
         <artifactId>javax.inject</artifactId>
         <version>1</version>
     </dependency>
-
+    
     <!-- Servlet --><!--
     <dependency>
         <groupId>javax.servlet</groupId>
@@ -277,7 +277,7 @@
         <artifactId>jstl</artifactId>
         <version>1.2</version>
     </dependency>
-
+	
     <!-- Test -->
     <dependency>
         <groupId>junit</groupId>
@@ -286,10 +286,8 @@
         <!-- <scope>test</scope> --><!-- 테스트 코드 작성 시 오류 방지 -->
     </dependency>
 
-
-
 <!-- Tiles Framework 관련 라이브러리 설치 않함 -->
-<!--
+<!-- 
 <dependency>
     <groupId>org.apache.tiles</groupId>
     <artifactId>tiles-api</artifactId>
@@ -311,16 +309,16 @@
     <version>3.0.8</version>
 </dependency>
 <dependency>
-   <groupId>org.apache.tiles</groupId>
-   <artifactId>tiles-template</artifactId>
-   <version>3.0.8</version>
+	<groupId>org.apache.tiles</groupId>
+	<artifactId>tiles-template</artifactId>
+	<version>3.0.8</version>
 </dependency>
  -->
 
 
 <!-- JSP Standard Tag Library (커스텀 JSTL 라이브러리) -->
 <!-- 위의 javax.servlet의 jstl, 1.2 가 문제 있을 시 교체 -->
-<!--
+<!-- 
 <dependency>
     <groupId>org.apache.taglibs</groupId>
     <artifactId>taglibs-standard-impl</artifactId>
@@ -342,7 +340,7 @@
     <version>1.2.5</version>
 </dependency>
 -->
-
+ 
     </dependencies>
 
     <build>
@@ -380,16 +378,15 @@
 <!-- 중요!!!!! -->
 <!-- XML 설정파일 대신 자바 구성 설정 클래스를 사용하는 경우 -->
 <!-- 메이븐의 정상작동을 위해 아래의 주석부분의 플러그인을 추가합니다(주석제거.) -->
-<!--
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-            </plugin>
- -->
+            </plugin> -->
+
 <!-- XML 설정파일 대신 자바 구성 설정 클래스를 사용하는 경우 END-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -402,3 +399,4 @@
         </plugins>
     </build>
 </project>
+	

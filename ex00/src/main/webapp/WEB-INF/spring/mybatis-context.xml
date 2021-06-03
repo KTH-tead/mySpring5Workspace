@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- Connection Pool 관련 Bean 구성: HikariCP -->
 	<!-- 스텝1: JDBC 정보 구성(이 방법이 2가지) -->
@@ -129,12 +131,23 @@
 		</property>
 	</bean>
 
+	<!-- Mapper 인터페이스 클래스 자동 빈 생성 설정 -->
 	<mybatis-spring:scan
 		base-package="org.zerock.ex00.mapper" />
 
-	<!-- MyBoardDAO용 -->
+	<!-- MyBoardDAO용 : 세션 생성 빈(Mapper 인터페이스 사용 시에는 필요 없음) -->
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
+	
+	<!-- 스프링 트랜잭션 기능 활성화 -->
+	<tx:annotation-driven/>
+	
+	<!-- Spring Transaction 관리자 빈(dataSource빈을 주입 받음) -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	
 </beans>

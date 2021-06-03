@@ -126,13 +126,11 @@
 										
 										<%-- 상세 페이지 이동 방법1 a 태그 이용 --%>
 									 	
-										
-										
 										<%-- 방법2 a태그와 form, jquery 이용 --%>
 										
-										
-										
-										<c:out value="${board.btitle}" /></td>
+											<c:out value="${board.btitle}" />
+											<small>[댓글 수 : <strong><c:out value="${board.breplyCnt}"/></strong>]</small>
+										</td>
 										<td><c:out value="${board.bwriter}" /></td>
 										<td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.bregDate}" />
 												<%-- <br> ${board.bregDate} --%>

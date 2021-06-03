@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <!-- <script>
+        const global_name = "전역변수";
+            function makePrinter() {
+                const outer_name = "외부함수변수";
+                function printName() {
+                    const inner_name = "내부함수변수";
+                    console.log(global_name);
+                    console.log(outer_name);
+                    console.log(inner_name);
+                }
+                return printName;  //함수를 반환
+            }
+            const print = makePrinter(); // makePrinter() 함수가 실행되어, printName() 함수를 반환하여 print 변수에 printName() 함수가 저장됨
+            // 이 때, print 변수에 저장된 것이 함수이므로 print 도 함수입니다.
+            print(); // print() 함수 실행
+    </script> -->
+    <script>
+        function makeGreeting(name) {
+                var greeting = "안녕! ";
+                return function () { // 익명함수가 클로저
+                    console.log(greeting + name); // greeting 이 자유변수.
+                };
+            }
+            var g1 = makeGreeting("홍길동");
+            var g2 = makeGreeting("강감찬");
+            g1();
+            g2();
+    </script>
+    <script>
+        var print = (function (name) { // name 매개변수를 가지는 익명함수 1
+                var greeting = "익명함수 1 의-지역변수 ";
+                return function () {//익명함수 2, 익명함수 1 이 실행되면 익명함수 2 가 반환됨.
+                    console.log(greeting + ", " + name); // 익명함수 2 는 익명함수 1 의 지역변수를 포함함.
+                };
+            }
+            )(" 나는 name 매개변수입니다"); // name 에 할당될 초기값 지정 , // () 가 자기 호출 함수임을 의미
+            print();
+    </script>
+    <script>
+        var print1 = ( function(name) { // name 매개변수를 가지는 익명함수 1
+        var greeting = "익명함수 1 의-지역변수 ";
+        return function() {//익명함수 2, 익명함수 1 이 실행되면 익명함수 2 가 반환됨.
+        console.log(greeting +", " + name); // 익명함수 2 는 익명함수 1 의 지역변수를 포함함.
+        };
+        }
+        )( ); // name 에 초기값 지정 안함  () 가 자기 호출 함수임을 의미
+        print1();
+    </script>
+</body>
+</html>
