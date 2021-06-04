@@ -12,9 +12,11 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +30,59 @@ public class FileUploadController {
 	//롬복을 사용 안할 때
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 	
-
+	
+	//
+	@GetMapping("/displayThumbnailFile")
+	@ResponseBody
+	public ResponseEntity<byte[]> getThumbNailFile(String fileName){
+		
+		logger.info("fileName:" + fileName);
+		
+		File file = new File(fileName);
+		//File file = new File("c:\\upload\\" + fileName);
+		
+		logger.info("file:" + file);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			HttpHeaders header = new HttpHeaders();
+			
+			//HttpHeader 객체에 썸네일이미지파일의 Content-Type 추가.
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			
+			//복사된 썸네일 파일을 HttpHeader에 추가된 Content-Type과 상태깞을 가지고
+			//ResponseEntity<byte[]> 객체 생성
+			result = new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//ResponseEntity<byte[]> 객체 반환
+		return result;
+	}
+    
+	
+//	//썸네일 이미지 파일 다운로드
+//	@GetMapping("/DisplayThumbnailFile")
+//	@ResponseBody
+//	public ResponseEntity<byte[]> getThumbNailFile(String fileName) {
+//	logger.info("fileName: " + fileName);
+//	File file = new File("c:\\upload\\" + fileName);
+//	logger.info("file: " + file);
+//	ResponseEntity<byte[]> result = null;
+//	try {
+//	HttpHeaders header = new HttpHeaders();
+//	//HttpHeader 객체에 썸네일이미지파일의 Content-Type 추가
+//	header.add("Content-Type", Files.probeContentType(file.toPath()));
+//	//복사된 썸네일 파일을 HttpHeader에 추가된 Content-Type과 상태깞을 가지고
+//	//ResponseEntity<byte[]> 객체 생성
+//	result = new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+//	} catch (IOException e) {
+//	e.printStackTrace();
+//	}
+//	//ResponseEntity<byte[]> 객체 반환
+//	return result;
+//	}
 	
 	//다중 파일 업로드 방법1 : form 방식의 파일 업로드
 	//파일 업로드 요청 JSP 페이지 호출
@@ -128,8 +182,13 @@ public class FileUploadController {
 			AttachInfoDTO attachInfoDTO = new AttachInfoDTO();
 			
 			//attachInfoDTO에 날짜형식경로 문자열 저장
-			attachInfoDTO.setUploadPath(strDatefmtPathName);
-			System.out.println("피드백객체에 저장된 날짜형식 경로: " + attachInfoDTO.getUploadPath());
+//			attachInfoDTO.setUploadPath(strDatefmtPathName);
+//			System.out.println("피드백객체에 저장된 날짜형식 경로: " + attachInfoDTO.getUploadPath());
+			
+			//Thumbnail 결과 표시 시에 날짜를 포함한 전체 경로를 저장하도록 수정.
+			attachInfoDTO.setUploadPath(fileUploadPath.toString());
+			System.out.println("저장된 전체경로: " + attachInfoDTO.getUploadPath());
+			
 			
 			//업로드파일이름 원본문자열
 			String strUploadFileName = multipartUploadFile.getOriginalFilename();
