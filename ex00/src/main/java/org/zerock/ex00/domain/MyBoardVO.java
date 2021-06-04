@@ -2,6 +2,7 @@ package org.zerock.ex00.domain;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,4 +19,6 @@ public class MyBoardVO {
 	private int bdelFlag ; //1: 삭제요청됨, 0: 유지
 	private Date bregDate ;
 	private Timestamp bmodDate ;
+	
+	private List<BoardAttachFileVO> attachFileList ;
 }
