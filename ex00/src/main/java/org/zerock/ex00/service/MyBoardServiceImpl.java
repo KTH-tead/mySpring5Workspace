@@ -125,9 +125,16 @@ public class MyBoardServiceImpl implements MyBoardService{
 	}
 	
 	//게시물 삭제 - 관리자 - 실제 삭제
+	@Transactional
 	@Override
 	public boolean removeBoard(Long bno) {
 		log.info("MyBoardService.removeBoard()에 전달된 bno : " + bno);
+		//데이터베이스 첨부파일 정보 삭제
+		//첨부파일이 없어도 SQL은 정상처리됨(0개 행이 삭제)
+		//테이블의 외래키(FK)에 ON DELETE CASCADE 옵션이 사용된 경우,
+		//첨부파일 정보 삭제는 데이터베이스에 의해 자동으로 처리되므로
+		//아래의 실행문은 필요없습니다.
+		myBoardAttachFileMapper.deleteAttachFilesByBno(bno);
 		return myBoardMapper.deleteMyBoard(bno) == 1;
 	}
 	
