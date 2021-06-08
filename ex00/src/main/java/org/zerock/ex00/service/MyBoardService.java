@@ -3,6 +3,7 @@ package org.zerock.ex00.service;
 import java.util.List;
 
 import org.zerock.ex00.common.paging.MyBoardPagingDTO;
+import org.zerock.ex00.domain.MyBoardAttachFileVO;
 import org.zerock.ex00.domain.MyBoardVO;
 
 public interface MyBoardService {
@@ -33,4 +34,7 @@ public interface MyBoardService {
 	
 	//게시물 삭제(관리자) 사용자 삭제 요청된 게시물 전체 삭제
 	public int removeAllDeletedBoard();
+	
+	//게시물의 첨부파일 조회
+	public List<MyBoardAttachFileVO> getAttachFilesByBno( Long bno);
 }

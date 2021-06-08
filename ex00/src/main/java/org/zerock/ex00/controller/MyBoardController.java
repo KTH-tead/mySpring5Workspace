@@ -1,6 +1,10 @@
 package org.zerock.ex00.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.ex00.common.paging.MyBoardPagingCreatorDTO;
 import org.zerock.ex00.common.paging.MyBoardPagingDTO;
+import org.zerock.ex00.domain.MyBoardAttachFileVO;
 import org.zerock.ex00.domain.MyBoardVO;
 import org.zerock.ex00.service.MyBoardService;
 
@@ -63,7 +69,17 @@ public class MyBoardController {
 	//게시물 등록 - 처리
 	@PostMapping("/register")
 	public String registerNewBoard(MyBoardVO myBoard, RedirectAttributes redirectAttr) {
+		log.info("컨트롤러 : 게시물등록(전달된vo 내용):" +myBoard.toString());
+		
+		System.out.println("===== attachFileInfo======");
+		if (myBoard.getAttachFileList() !=null) {
+			myBoard.getAttachFileList().forEach(attachFile -> System.out.println("첨부파일 정보:" + attachFile.toString()));
+		}
+		
+		System.out.println("==============");
+		
 		log.info("컨트롤러 - 게시물 등록 : " + myBoard);
+		
 		long bno = myBoardService.registerBoard(myBoard);
 		log.info("등록된 게시물의 bno : " + bno);
 		
@@ -183,4 +199,16 @@ public class MyBoardController {
 	
 		return "redirect:/myboard/list";
 	}
+	
+	//특정 게시물의 첨부파일 정보를 JSON으로 전달 
+	
+	@GetMapping(value = "/getFiles", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public ResponseEntity<List<MyBoardAttachFileVO>> showAttachFiles(Long bno){
+		System.out.println("컨트롤러: 조회할 첨부파일의 게시물 번호(bno) :" +bno);
+		
+		return new ResponseEntity<List<MyBoardAttachFileVO>>(myBoardService.getAttachFilesByBno(bno), HttpStatus.OK);
+	}
+	
+	
 }

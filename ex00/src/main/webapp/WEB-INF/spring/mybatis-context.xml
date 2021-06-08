@@ -55,16 +55,14 @@
 
 	<!-- log4jdbc-log4j2 적용(개발용) -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName"
-			value="${jdbcHikariLog.driverClassName}"></property>
+		<property name="driverClassName" value="${jdbcHikariLog.driverClassName}"></property>
 		<property name="jdbcUrl" value="${jdbcHikariLog.jdbcUrl}"></property>
 		<property name="username" value="${jdbcHikariLog.username}"></property>
 		<property name="password" value="${jdbcHikariLog.password}"></property>
 	</bean>
 	
 	<!-- 스텝2: HikariDataSource 클래스를 이용한 dataSource 빈 생성 -->
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
-		destroy-method="close">
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 
@@ -127,17 +125,16 @@
 				<value>classpath:org/zerock/ex00/mapper/MyBoardMapper.xml</value>
 				<value>classpath:org/zerock/ex00/mapper/MyBoardMapperDAO.xml</value>
 				<value>classpath:org/zerock/ex00/mapper/MyReplyMapper.xml</value>
+				<value>classpath:org/zerock/ex00/mapper/MyBoardAttachFileMapper.xml</value>
 			</list>
 		</property>
 	</bean>
 
 	<!-- Mapper 인터페이스 클래스 자동 빈 생성 설정 -->
-	<mybatis-spring:scan
-		base-package="org.zerock.ex00.mapper" />
+	<mybatis-spring:scan base-package="org.zerock.ex00.mapper" />
 
 	<!-- MyBoardDAO용 : 세션 생성 빈(Mapper 인터페이스 사용 시에는 필요 없음) -->
-	<bean id="sqlSession"
-		class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	

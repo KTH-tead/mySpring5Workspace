@@ -1,95 +1,179 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<%@ include file="../myinclude/myheader.jsp" %>
+<%@ include file="../myinclude/myheader.jsp"%>
 
-    
+
 <style>
 .txtBoxCmt, .txtBoxComment {
-overflow: hidden; resize: vertical; min-height: 100px; color: black;
+	overflow: hidden;
+	resize: vertical;
+	min-height: 100px;
+	color: black;
+}
+
+.bigImageWrapper {
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0%;
+	width: 100%;
+	height: 100%; /* background-color: lightgray; */
+	z-index: 100;
+}
+
+.bigImage {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bigImage img {
+	height: 100%;
+	max-width: 100%;
+	width: auto;
+	overflow: hidden
 }
 </style>
 
 <div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h3 class="page-header" style="white-space: nowrap;">Board - Detail: <c:out value="${board.bno}"/>번 게시물</h3>
-        </div>
-    </div>
-<%-- 게시물 상세 표시 시작 --%>    
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading"> 
-                    <div class="row">
-                        <div class="col-md-3" style="white-space: nowrap; height: 45px; padding-top:11px;">
-                            <strong style="font-size:18px;">${board.bwriter}님 작성</strong>
-                        </div>
-                        <div class="col-md-3" style="white-space: nowrap; height: 45px; padding-top:16px;">
-                            <span class="text-primary" style="font-size: smaller; height: 45px; padding-top: 19px;">
-                                <span>
-                                    <span>등록일:&nbsp;</span>
-                                    <strong><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.bregDate}"/></strong>
-                                    <span>&nbsp;&nbsp;</span>                                   
-                                </span>
-                                <span>조회수:&nbsp;<strong><c:out value="${board.bviewsCnt}"/></strong></span>
-                            </span>
-                        </div>
-                        <div class="col-md-6" style="height: 45px; padding-top:6px;"><!-- vertical-align: middle; -->
-                            <div class="button-group pull-right">
-                                <button type="button" id="btnToModify" data-oper="modify" class="btn btn-primary"><span>수정</span></button>
-                                <button type="button" id="btnToList" data-oper="list" class="btn btn-info"><span>목록</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.panel-heading -->
-                
-                <div class="panel-body form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label" style="white-space: nowrap;">글제목</label>
-                        <div class="col-sm-11">
-                            <input class="form-control" value='<c:out value="${board.btitle}"/>' name="btitle" readonly="readonly"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label" style="white-space: nowrap;">글내용</label>
-                        <%-- <textarea>와 </textarea>는 한 줄에 작성되어야 필요없는 공백이 포함되지 않음 --%>
-                        <div class="col-sm-11">
-                            <textarea class="form-control" rows="3" name="bcontent" style="resize: none;" 
-                                      readonly="readonly"><c:out value="${board.bcontent}"/></textarea>
-                        </div>
-                    </div>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div><!-- /.col-lg-12 -->
-    </div><!-- /.row -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h3 class="page-header" style="white-space: nowrap;">
+				Board - Detail:
+				<c:out value="${board.bno}" />
+				번 게시물
+			</h3>
+		</div>
+	</div>
+	<%-- 게시물 상세 표시 시작 --%>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-md-3"
+							style="white-space: nowrap; height: 45px; padding-top: 11px;">
+							<strong style="font-size: 18px;">${board.bwriter}님 작성</strong>
+						</div>
+						<div class="col-md-3"
+							style="white-space: nowrap; height: 45px; padding-top: 16px;">
+							<span class="text-primary"
+								style="font-size: smaller; height: 45px; padding-top: 19px;">
+								<span> <span>등록일:&nbsp;</span> <strong><fmt:formatDate
+											pattern="yyyy-MM-dd HH:mm:ss" value="${board.bregDate}" /></strong> <span>&nbsp;&nbsp;</span>
+							</span> <span>조회수:&nbsp;<strong><c:out
+											value="${board.bviewsCnt}" /></strong></span>
+							</span>
+						</div>
+						<div class="col-md-6" style="height: 45px; padding-top: 6px;">
+							<!-- vertical-align: middle; -->
+							<div class="button-group pull-right">
+								<button type="button" id="btnToModify" data-oper="modify"
+									class="btn btn-primary">
+									<span>수정</span>
+								</button>
+								<button type="button" id="btnToList" data-oper="list"
+									class="btn btn-info">
+									<span>목록</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.panel-heading -->
 
-    <form id="frmSendValue"><!-- 폼을 추가 -->
-        <input type='hidden' name='bno' id="bno" value='<c:out value="${board.bno}"/>'>
-        <input type='hidden' name='pageNum' value='${myBoardPagingDTO.pageNum}'>
-        <input type='hidden' name='rowAmountPerPage' value='${myBoardPagingDTO.rowAmountPerPage}'>
-        <input type='hidden' name='scope' value='${myBoardPagingDTO.scope}'>
-        <input type='hidden' name='keyword' value='${myBoardPagingDTO.keyword}'>
-    </form>
-    
-    
-    
+				<div class="panel-body form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-1 control-label" style="white-space: nowrap;">글제목</label>
+						<div class="col-sm-11">
+							<input class="form-control"
+								value='<c:out value="${board.btitle}"/>' name="btitle"
+								readonly="readonly" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label" style="white-space: nowrap;">글내용</label>
+						<%-- <textarea>와 </textarea>는 한 줄에 작성되어야 필요없는 공백이 포함되지 않음 --%>
+						<div class="col-sm-11">
+							<textarea class="form-control" rows="3" name="bcontent"
+								style="resize: none;" readonly="readonly"><c:out
+									value="${board.bcontent}" /></textarea>
+						</div>
+					</div>
+				</div>
+				<!-- /.panel-body -->
+
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+
+	<!-- 첨부파일 표시 -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">첨부파일</div>
+				수정
+				<div class="panel-body">
+					<div class='form-group bigImageWrapper'>
+						 원본 이미지 표시 div 추가
+						<div class='bigImage'>
+							<%-- 이미지파일 크게 표시되는 영역: 썸네일 클릭 시, 첨부파일 패널 영역에만 원본이미지가 표시됨.--%>
+						</div>
+					</div>
+					<%-- 원본이미지 div 끝 --%>
+					<div class="form-group fileUploadResult">
+						<ul>
+							<!-- 첨부파일 목록이 표시될 영역 -->
+						</ul>
+					</div>
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+
+	<form id="frmSendValue">
+		<!-- 폼을 추가 -->
+		<input type='hidden' name='bno' id="bno"
+			value='<c:out value="${board.bno}"/>'> <input type='hidden'
+			name='pageNum' value='${myBoardPagingDTO.pageNum}'> <input
+			type='hidden' name='rowAmountPerPage'
+			value='${myBoardPagingDTO.rowAmountPerPage}'> <input
+			type='hidden' name='scope' value='${myBoardPagingDTO.scope}'>
+		<input type='hidden' name='keyword'
+			value='${myBoardPagingDTO.keyword}'>
+	</form>
+
+
+
 
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<p style="margin-bottom: 0px; font-size: 16px;">
-						<strong style="padding-top: 2px;"> <span>댓글&nbsp;<c:out value="${board.breplyCnt}" />개</span><span>&nbsp;</span>
+						<strong style="padding-top: 2px;"> <span>댓글&nbsp;<c:out
+									value="${board.breplyCnt}" />개
+						</span><span>&nbsp;</span>
 							<button type="button" id="btnChgCmtReg"
 								class="btn btn-info btn-sm">댓글 작성</button>
 							<button type="button" id="btnRegCmt"
-								class="btn btn-warning btn-sm" style="display: none">댓글	등록</button>
+								class="btn btn-warning btn-sm" style="display: none">댓글
+								등록</button>
 							<button type="button" id="btnCancelRegCmt"
 								class="btn btn-warning btn-sm" style="display: none">취소</button>
 						</strong>
@@ -144,8 +228,8 @@ overflow: hidden; resize: vertical; min-height: 100px; color: black;
 	<!-- .row : 댓글 화면 표시 끝 -->
 	<!-- 댓글 페이징 데이터 저장 form -->
 	<form id="frmCmtPagingValue">
-		<input type='hidden' name='pageNum' value='' />
-		<input type='hidden' name='rowAmountPerPage' value='' />
+		<input type='hidden' name='pageNum' value='' /> <input type='hidden'
+			name='rowAmountPerPage' value='' />
 	</form>
 
 
@@ -156,7 +240,8 @@ overflow: hidden; resize: vertical; min-height: 100px; color: black;
 
 
 
-</div><!-- /#page-wrapper -->
+</div>
+<!-- /#page-wrapper -->
 
 <%-- 게시물 상세 표시 끝 --%>
 
@@ -183,7 +268,8 @@ $("#btnToList").on("click", function(){
 })
 </script>
 
-<script type="text/javascript" src="${contextPath}/resources/js/mycomment.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/resources/js/mycomment.js"></script>
 
 
 
@@ -559,96 +645,134 @@ $(".chat").on("click", ".commentLi .btnDelCmt", function(){
 });
 	
 		
-	//페이지 로딩시 함수 실행
+	/* //페이지 로딩시 함수 실행
 	$(function() {
 		showCmtList(1);
-	})
+	}) 
 
 	
+
+	} */
 	
-	/*
-	 //댓글 목록 표시 테스트	
-	 myCommentClsr.getCmtList(
-	 {bno:bnoValue, page:1},   //1번째 bnoAndPage의 인자값(JS객체)
-	 function(replyPagingCreator){  //2번째 callback 인자값: 성공 시 실행되는 함수(익명블록)
-	 for (var i = 0, len = replyPagingCreator.replyList.length || 0 ; i < len; i++){
-	 console.log(replyPagingCreator.replyList[i]);
-	 }
-	 }
-	 );  
-	 */
+	//첨부파일 정보 표시 함수
+	function showUploadedFiles(uploadResult){
+		//서버로 부터 결과내용이 전달되지 않으면, 함수 종료.
+		if(!uploadResult || uploadResult.length == 0){
+			return ;
+		}
+		//ul 태그 변수화
+		var fileUploadResult = $(".fileUploadResult ul");
+		var str = "";
+		
+		$(uploadResult).each(function(i, obj){ //전달받은 배열형식 데이터 각각에 대하여
+			if (obj.fileType == "F"){//파일이 이미지가 아닌 경우
+				//아이콘 이미지 및 원본 파일이름(uuid 없는 이름) 표시
+				str += "<li data-filename='" +obj.fileName+"' data-uploadpath '" +obj.uploadPath+ "'"
+					+ " data-uuid='" +obj.uuid + "'data-filetype='" +obj.fileType +"'>"
+					+ "<img src='${contextPath}/resources/img/icon-attach.png'"
+					+ "     alt= 'No Icon' style='height:18px; width:18px;'>"
+					+ obj.fileName
+					+ "</li>";
+			} else if (obj.fileType == "I") {//이미지파일인 경우
+				//업로드 된 썸네일 파일이름(uuid 포함된 이름, 썸네일 표시를 위해 필요): encodeURIComponent로 처리
+				var thumbnailFilePath  =
+					encodeURIComponent(obj.uploadPath +"/s_" +obj.uuid+ "_" +obj.fileName);
+				//아이콘 이미지 및 파일이름(원본파일이름) 표시
+				str += "<li data-filename='" +obj.fileName + "'data-uploadpath='" +obj.uploadPath +"'"
+					+ "data-uuid='" +obj.uuid+ "'data-filetype'" +obj.fileType+ "'>"
+					+ "<img src='${contextPath}/DisplayThumbnailFile?fileName=" +thumbnailFilePath+"'"
+					+ "alt ='No Icon' style='height:18px; width:18px;'>"
+					+ obj.fileName
+					+ "</li>";
+			}
+		});
+		//기존 페이지에 결과를 HTML로 추가
+		fileUploadResult.append(str);
+		}
+	
+	$(document).ready(function(){//페이지 로딩 시 함수 실행, 전체 JavaScript 내용 중 제일 마지막에 위치해야 함
+		$.ajax({
+			url : '${contextPath}/myboard/getFiles',
+			data : {bno: bnoValue}, // bnoValue는 상단에 정의된 것 사용
+			type : 'get',
+			dataType: 'json',
+			success : function (fileList){
+				showUploadedFiles(fileList);
+			}
+		}) // ajax end
+		
+		showCmtList(1); //댓글목록 표시
+	});
+	
+	
+	//이미지 표시
+	//display 속성의 flex 옵션을 이용하면,
+	//이미지가 웹브라우저의 중앙에 표시됩니다.
+	function showImage(calledPathImagefileName) {
 
-	/*
-	 //댓글등록  테스트
-	 myCommentClsr.registerCmt(
-	 {bno:bnoValue, rcontent:"JS-클로저-댓글 입력 테스트입니다.", rwriter: "user7"} , //1-comment인자값 
-	 function(result){    //2번째 callback 인자값: 성공 시 실행되는 함수
-	 alert("myCommentClsr.registerCmt() 처리 결과 " + result);
-	 }
-	 );
+		$(".bigImageWrapper").css("display", "flex").show();
 
+		$(".bigImage").html(
+			"<img src='${contextPath}/fileDownloadAjax?fileName=" + calledPathImagefileName + "'>")
+			.animate({width: '100%', height: '100%' }, 1000);
+	}
+	//DIV 클릭 이벤트처리: 클릭 시 1초 후에 이미지 사라짐.
+	$(".bigImageWrapper").on("click", function (e) {
+			$(".bigImage").animate({ width: '0%', height: '0%' }, 1000);
+			//setTimeout(() => {$(this).hide();}, 1000);
+			setTimeout(function () {
+				$(".bigImageWrapper").hide();
+			}, 1000);
+		});
 
+	//첨부파일 다운로드 (새로 추가)
+	
+	$(".fileUploadResult ul").on("click", "li", function(e){
+		
+		var objLi = $(this);
+		
+		var downloadedPathFileName = encodeURIComponent(objLi.data("uploadpath") +"/" +
+														objLi.data("uuid")+ "_" +objLi.data("filename"));
+		
+		if(objLi.data("filetype") == "I"){
+			//이미지파일일 경우, 원본이미지를 다운로드 하여 결과표시 영역에 표시
+			showImage(downloadedPathFileName.replace(new RegExp(/\\/g),"/"));
+		} else { // else if(objLi.data("filetype") == "F"){
+			//이미지가 이닐 경우, 다운로드 수행
+			self.location = "${contextPath}/fileDownloadAjax?fileName=" +downloadedPathFileName ;
+		}
+	});
 
-	 //답글등록 테스트
-	 myCommentClsr.registerReply(
-	 {bno: bnoValue, prno: 1, rcontent: "JS-클로저-댓글의 답글 입력 테스트입니다.", rwriter: "user10"}, 
-	 function(result){ //2번째 callback 인자값: 성공시 실행되는 함수
-	 alert("myCommentClsr.registerReply()처리결과 " + result); //익명블록 형태의 콜백함수
-	 }
-	 );
-*/	 
-
-	/*
-	 //댓글-답글 조회 테스트
-	 myCommentClsr.getCmtReply(
-	 {bno: bnoValue, rno: 1 },  function(data){
-	 console.log(data);
-	 }
-	 );
-	 */
-
-	/*
-	 //댓글-답글 수정 테스트 
-	 myCommentClsr.modifyCmtReply(
-	 {bno : bnoValue, rno : 1, rcontent: "JS클로저에 의한 댓글 수정======="}	,
-	 function(modifyResult) {
-	 alert(modifyResult + "- ajax 처리 완료");
-	 }
-	 );
-	 */
-
-	/*
-	 //댓글-답글 삭제 테스트(cdelFlg=1로 변경만 함)
-	 myCommentClsr.setCmtReplyDeleted(
-	 {bno : bnoValue, rno : 1, rwriter: "test04"},
-	 function(deleteResult) {
-	 console.log(deleteResult);
-	 if (deleteResult === "댓글 삭제 성공") {
-	 alert(deleteResult + ": 댓글이 삭제되었습니다.(BysetCmtReplyDeleted)");
-	 }
-	 },
-	 function(err) {
-	 alert("오류로 인한 댓글 삭제 작업 취소...");
-	 }
-	 );
-	 */
-
-	/*
-	 //댓글-답글 삭제 테스트(실제 삭제 발생)
-	 myCommentClsr.removeCmtReply(
-	 {bno : bnoValue, rno : 2, rwriter: "user10"},
-	 function(deleteResult) {
-	 console.log(deleteResult);
-	 if (deleteResult === "댓글 삭제 성공") {
-	 alert(deleteResult + ": 댓글이 삭제되었습니다(ByRemoveCmtReply).");
-	 }
-	 },
-	 function(err) {
-	 alert("오류로 인한 댓글 삭제 작업 취소...");
-	 }
-	 ); 
-	 */
+	//파일 삭제:이벤트 위임을 이용하여, 서버에서 파일 삭제, 관련된 브라우저의 항목도 삭제.
+	$(".fileUploadResult").on("click", "span", function (e) {
+		//$(this).parent().remove();
+		//this: span
+		var targetFileName = $(this).data("filename");
+		var targetFileType = $(this).data("filetype");
+		console.log(targetFileName);
+		console.log(targetFileType);
+		//var targetLi = $(this).closest("li");
+		var parentLi = $(this).parent();
+		$.ajax({
+			url: '${contextPath}/deleteUploadedFile',
+			data: {fileName: targetFileName,fileType: targetFileType},
+			dataType: 'text',
+			type: 'POST',
+			success: function (result) {
+				if (result == "success") {
+					alert("파일이 정상적으로 삭제되었습니다.");
+					//이벤트 위임을 이용하여, 삭제된 파일의 항목을 브라우저의 HTML 문서에서 삭제합니다.
+					//$(this).parent().remove();(X)
+					//$(this).closest("li").remove();(X)
+					//targetLi.remove();
+					parentLi.remove();
+				} else {
+					alert("오류: 파일 삭제 실패.");
+				}
+			}
+		}); //End $.ajax
+	});
 </script>
 
 
-<%@ include file="../myinclude/myfooter.jsp" %>
+<%@ include file="../myinclude/myfooter.jsp"%>

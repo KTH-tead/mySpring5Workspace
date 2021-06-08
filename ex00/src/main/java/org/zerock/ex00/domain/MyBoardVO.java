@@ -20,5 +20,5 @@ public class MyBoardVO {
 	private Date bregDate ;
 	private Timestamp bmodDate ;
 	
-	private List<BoardAttachFileVO> attachFileList ;
+	private List<MyBoardAttachFileVO> attachFileList ;
 }

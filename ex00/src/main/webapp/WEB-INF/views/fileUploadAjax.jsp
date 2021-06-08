@@ -33,8 +33,6 @@
 						overflow: hidden"
 
 					}
-				</style>
-				<style>
 					.bigImageWrapper {
 						position: absolute;
 						display: none;
