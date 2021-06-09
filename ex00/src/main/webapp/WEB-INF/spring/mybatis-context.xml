@@ -126,6 +126,7 @@
 				<value>classpath:org/zerock/ex00/mapper/MyBoardMapperDAO.xml</value>
 				<value>classpath:org/zerock/ex00/mapper/MyReplyMapper.xml</value>
 				<value>classpath:org/zerock/ex00/mapper/MyBoardAttachFileMapper.xml</value>
+				<value>classpath:org/zerock/ex00/mapper/MyMemberMapper.xml</value>
 			</list>
 		</property>
 	</bean>

@@ -33,6 +33,7 @@
 	<context:component-scan base-package="org.zerock.ex00.controller" />
 	<context:component-scan base-package="org.zerock.ex00.common.fileupload" />
 	<context:component-scan base-package="org.zerock.ex00.common.filedownload" />
+	<context:component-scan base-package="org.zerock.ex00.common.security" />
 	<!-- <context:component-scan base-package="practice.controller" /> -->
 	
 	<!-- DAO 클래스 빈 자동 생성 -->
