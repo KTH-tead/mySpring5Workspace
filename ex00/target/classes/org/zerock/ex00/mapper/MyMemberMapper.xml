@@ -13,10 +13,11 @@
 		<result property="userid" column="userid"/>
 		<result property="userpw" column="userpw"/>
 		<result property="userName" column="userName"/>
+		<result property="enabled" column="enabled"/>
 		<result property="mregDate" column="mregDate"/>
 		<result property="mmodDate" column="mmodDate"/>
 		<result property="mdropFlg" column="mdropFlg"/>
-		<result property="enabled" column="enabled"/>
+
 		
 		<collection property="authorityList" resultMap="authorityMap"/> <!-- 권한 정보가 저장됨 -->
 	</resultMap>
