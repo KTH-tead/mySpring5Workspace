@@ -1,4 +1,4 @@
-package com.spring5212.mypro00.security;
+package org.zerock.ex00.security;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
