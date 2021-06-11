@@ -239,4 +239,6 @@ public class MyBoardController {
 			} // end catch
 		});// End 익명블록, forEach
 	}// End Method
+	
+	
 }

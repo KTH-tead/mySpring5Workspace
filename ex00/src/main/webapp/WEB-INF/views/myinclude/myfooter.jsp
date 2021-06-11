@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-    </div>
+<!--     </div> -->
     <!-- /#wrapper -->
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->

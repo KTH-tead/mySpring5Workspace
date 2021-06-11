@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<!DOCTYPE html>
@@ -53,7 +54,8 @@ pageEncoding="UTF-8"%>
 										</label>
 									</div>
 									<div>
-										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /><!-- div 추가 됨 -->
+										<sec:csrfInput/>
+										<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%><!-- div 추가 됨 -->
 									</div>
 									<!-- Change this to a button or input when using this as a form -->
 									<!-- <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a> -->
