@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <%@ include file="../myinclude/myheader.jsp"%>
@@ -66,11 +67,14 @@
 								value='<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${board.bmodDate}"/>'
 								disabled>
 						</div>
-
-						<button type="button" id="btnModify" data-oper="modify"
-							class="btn btn-default">수정</button>
-						<button type="button" id="btnRemove" data-oper="remove"
-							class="btn btn-danger">삭제</button>
+						<sec:authorize access="isAuthenticated()"> <!-- 추가: 로그인 유무 확인 -->
+							<sec:authentication property="principal" var="principal"/>
+								<c:if test="${principal.username eq board.bwriter}">
+									<button type="button" id="btnModify" data-oper="modify" class="btn btn-default">수정</button>
+									<button type="button" id="btnRemove" data-oper="remove" class="btn btn-danger">삭제</button>						
+								</c:if>
+						</sec:authorize>
+						
 						<button type="button" id="btnList" data-oper="list"
 							class="btn btn-info">취소</button>
 
@@ -81,6 +85,8 @@
 							type='hidden' name='scope' value='${myBoardPagingDTO.scope}'>
 						<input type='hidden' name='keyword'
 							value='${myBoardPagingDTO.keyword}'>
+							
+						<sec:csrfInput/>
 					</form>
 				</div>
 			</div>
@@ -117,6 +123,13 @@
 <script>
 	//form의 수정/삭제/목록보기 버튼에 따른 동작 제어
 	var frmModify = $("#frmModify");
+	
+	var loginUser = "";<%-- 추가 --%>
+	
+	<sec:authorize access="isAuthenticated()">
+		loginUser = '<sec:authentication property="principal.username"/>';
+	</sec:authorize>
+	
 	$('button').on(
 			"click",
 			function(e) {
@@ -318,7 +331,7 @@
 			}); */
 
 			//form의 수정/삭제/목록보기 버튼에 따른 동작 제어
-			var frmModify = $("#frmModify");
+			/* var frmModify = $("#frmModify");
 			$(".btn-frmModify").on("click", function(e){ 수정
 			//e.preventDefault(); //버튼 유형이 submit가 아니므로 설정할 필요 없음
 			var operation = $(this).data("oper"); //각 버튼의 data-xxx 속성에 설정된 값을 저장
@@ -352,7 +365,57 @@
 			frmModify.attr("action","${contextPath}/myboard/list").attr("method","get");
 			}
 			frmModify.submit() ; //요청 전송
-			});
+			}); */
+			
+			$('.btn-frmModify').on("click", function(e){
+				//e.preventDefault(); //버튼 유형이 submit가 아니므로 설정할 필요 없음
+				var operation = $(this).data("oper"); //각 버튼의 data-xxx 속성에 설정된 값을 저장
+				var bwriterVal = '<c:out value="${board.bwriter}"/>';<%-- 추가 --%>
+				alert("operation: "+ operation + ", bwriterVal: " + bwriterVal);<%-- 기존코드 삭제 후, 추가 --%>
+				<%--취소(목록)을 먼저 처리 후, 수정 삭제 처리 순서로 if 절 수정 --%>
+				if(operation == "list"){ //게시물 목록 화면 요청
+				 var pageNumInput = $("input[name='pageNum']").clone();
+				var rowAmountInput = $("input[name='rowAmountPerPage']").clone();
+				var scopeInput = $("input[name='scope']").clone();
+				var keywordInput = $("input[name='keyword']").clone();
+				frmModify.empty();
+				frmModify.append(pageNumInput);
+				frmModify.append(rowAmountInput);
+				frmModify.append(scopeInput);
+				frmModify.append(keywordInput);
+				frmModify.attr("action","${contextPath}/myboard/list").attr("method","get");
+				} else {
+				<%--로그인 안 한 경우--%>
+				if(!loginUser){
+				alert("로그인 후, 수정/삭제가 가능합니다.");
+				return ;
+				}
+				<%--로그인 계정과 작성자가 다른 경우--%>
+				if(bwriterVal != loginUser){
+				alert("작성자만 수정/삭제가 가능합니다");
+				return ;
+				}
+				if(operation == "modify"){ //게시물 수정 요청
+				var strFilesInputHidden = "";
+				//업로드 결과의 li 요소 선택하여 각각에 대하여 다음을 처리
+				$(".fileUploadResult ul li").each(function(i, obj){
+				var objLi = $(obj);
+				strFilesInputHidden
+				+= " <input type='hidden' name='attachFileList["+i+"].uuid' value='"+objLi.data("uuid")+"'>"
+				+ " <input type='hidden' name='attachFileList["+i+"].uploadPath' value='"+objLi.data("uploadpath")+"'>"
+				+ " <input type='hidden' name='attachFileList["+i+"].fileName' value='"+objLi.data("filename")+"'>"
+				+ " <input type='hidden' name='attachFileList["+i+"].fileType' value='"+ objLi.data("filetype")+"'>" ;
+				});
+				console.log(strFilesInputHidden);//테스트 후, 주석처리할 것
+				frmModify.append(strFilesInputHidden); //form에 추가
+				frmModify.attr("action", "${contextPath}/myboard/modify");
+				} else if(operation == "remove"){ //게시물 삭제 요청//게시물 삭제 요청
+				//frmModify.attr("action", "${contextPath}/myboard/delete");
+				frmModify.attr("action", "${contextPath}/myboard/remove");
+				}
+				}
+				frmModify.submit() ; //요청 전송
+				});
 			
 	//파일 삭제(수정화면): 브라우저 표시 항목만 삭제.
 	//$(".fileUploadResult").on("click","li span", function(e){

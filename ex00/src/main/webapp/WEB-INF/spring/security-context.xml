@@ -33,12 +33,20 @@ class="com.spring5212.mypro00.common.security.MyNoPwEncryptPasswordEncoder" /> -
 		<!-- pattern 속성에는 contextPath를 포함하지 않습니다. auto-config="true" -->
 		<!-- access에 설정하는 권한을 ROLE을 통해서 설정하는 경우, 권한이름은 ROLE_로 시작해야 함 -->
 		
-		<!-- <security:intercept-url pattern="/**" access="permitAll" /> -->
-			 <security:intercept-url pattern="/" access="permitAll"/>
+		<security:intercept-url pattern="/**" access="permitAll" /> 
+		<security:intercept-url pattern="/myboard/list" access="permitAll" />
+		<security:intercept-url pattern="/myboard/detail" access="permitAll"/> 
+		
+		<!-- <security:intercept-url pattern="/myboard/register" access="isAuthenticated()"/> --> 
+		 <!-- 작동하지 않음 -->
+		
+		<!-- 구성완료 시에 이 제어설정은 삭제 또는 주석처리 합니다 -->
+			 <!-- <security:intercept-url pattern="/" access="permitAll"/>
 			 <security:intercept-url pattern="/myboard/list" access="permitAll"/>
 			 <security:intercept-url pattern="/myboard/modify" access="hasRole('ROLE_MEMBER')"/>
 			 <security:intercept-url pattern="/myboard/register" access="hasAnyRole('ROLE_MEMBER', 'ROLE_USER')"/>
 			 <security:intercept-url pattern="/myboard/detail" access="hasRole('ROLE_ADMIN')"/>
+			 <security:intercept-url pattern="/myboard/detail" access="hasauthority('ROLE_ADMIN')"/>  -->
 	
 		<!-- 로그인 된 상태에서는 로그인이나 회원가입 화면에 접근 못하도록 함 -->
 		<!-- <security:intercept-url pattern="/myLoginPage" access="isAnonymous()" /> -->

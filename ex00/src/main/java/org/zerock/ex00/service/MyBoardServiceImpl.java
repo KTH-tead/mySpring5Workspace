@@ -102,10 +102,11 @@ public class MyBoardServiceImpl implements MyBoardService{
 		
 		//게시물 수정: tbl_myboard 테이블에 수정
 		boolean boardModifyResult = myBoardMapper.updateMyBoard(myBoard) == 1 ;
-		
+		log.info("boardModifyResult:" + boardModifyResult);
+		log.info("myBoard.getAttachFileList().size():" + myBoard.getAttachFileList().size());
 		//게시물 수정이 성공하고, 첨부파일이 있는 경우에만 다음작업 수행
 		//첨부파일 정보 저장: tbl_myAttachFiles 테이블에 저장
-		if (boardModifyResult && myBoard.getAttachFileList().size() > 0) {
+		if (boardModifyResult && myBoard.getAttachFileList() != null) {
 		myBoard.getAttachFileList().forEach(
 		attachFile -> {
 		attachFile.setBno(bno);

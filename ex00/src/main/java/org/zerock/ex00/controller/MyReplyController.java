@@ -2,6 +2,7 @@ package org.zerock.ex00.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,6 +57,7 @@ public class MyReplyController {
 	}
 	
 	//게시물에 대한 댓글 등록 : rno 반환
+	@PreAuthorize("isAuthenticated()") 
 	@PostMapping(value = "/{bno}/new",
 				 //consumes = {"application/json; charset=UTF-8"},
 				 produces = {"text/plain; charset=UTF-8"})
@@ -68,6 +70,7 @@ public class MyReplyController {
 	}
 
 	//게시물에 대한 댓글의 답글 등록 :  rno 반환
+	@PreAuthorize("isAuthenticated()") 
 	@PostMapping(value = "/{bno}/{prno}/new",
 						consumes = {"application/json; charset=UTF-8"},
 						produces = {"text/plain; charset=UTF-8"})
@@ -92,6 +95,7 @@ public class MyReplyController {
 	}
 	
 	//게시물에 대한 특정 댓글 수정
+	@PreAuthorize("isAuthenticated() && principal.username == #myReply.rwriter") 
 	@RequestMapping(value = "/{bno}/{rno}",
 					method = {RequestMethod.PUT, RequestMethod.PATCH},
 					consumes = "application/json; charset=UTF-8",
@@ -110,10 +114,12 @@ public class MyReplyController {
 	}
 	
 	//게시물에 대한 특정 댓글 삭제
+	@PreAuthorize("isAuthenticated() && principal.username == #myReply.rwriter")
 	@DeleteMapping(value = "/{bno}/{rno}",
 				   produces = {"text/plain; charset=UTF-8"})
 	public ResponseEntity<String> removeReply(@PathVariable("bno") Long bno,
-											  @PathVariable("rno") Long rno) {
+											  @PathVariable("rno") Long rno,
+											  @RequestBody MyReplyVO myReply)	{
 		int delCnt = myReplyService.removeReply(bno, rno);
 		
 		return delCnt == 1

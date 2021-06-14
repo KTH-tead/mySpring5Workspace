@@ -3,6 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <%@ include file="../myinclude/myheader.jsp"%>
@@ -66,13 +68,15 @@
 						</div>
 
 						<div class="form-group">
-							<label>작성자</label> <input class="form-control writer"
-								name="bwriter" minlength="4">
+							<label>작성자</label> <input class="form-control writer" name="bwriter"
+							value='<sec:authentication property="principal.username"/>' readonly="readonly">
 						</div>
 
 						<button type="submit" class="btn btn-primary submit_button">등록</button>
 						<button type="button" data-oper="list" class="btn btn-warning"
 							onClick="location.href='${contextPath}/myboard/list'">취소</button>
+						<sec:csrfInput/>
+						<%-- 추가, spring security taglib 가 설정된 경우 사용됨 --%>
 					</form>
 					<!-- /.table-responsive -->
 				</div>

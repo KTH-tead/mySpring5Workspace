@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -76,10 +77,15 @@
 						<div class="col-md-6" style="height: 45px; padding-top: 6px;">
 							<!-- vertical-align: middle; -->
 							<div class="button-group pull-right">
-								<button type="button" id="btnToModify" data-oper="modify"
-									class="btn btn-primary">
-									<span>수정</span>
-								</button>
+							<%-- 수정 버튼을 찾아서 다음의 코드를 추가: 수정버튼은 로그인 한 작성자일 경우에만 표시 --%>
+							<sec:authorize access="isAuthenticated()">
+								<sec:authentication property="principal" var="principal"/>
+									<c:if test="${principal.username eq board.bwriter}">
+									<button type="button" id="btnToModify" data-oper="modify" class="btn btn-primary">
+										<span>수정</span>
+									</button>
+									</c:if>
+								</sec:authorize>							
 								<button type="button" id="btnToList" data-oper="list"
 									class="btn btn-info">
 									<span>목록</span>
@@ -169,8 +175,10 @@
 						<strong style="padding-top: 2px;"> <span>댓글&nbsp;<c:out
 									value="${board.breplyCnt}" />개
 						</span><span>&nbsp;</span>
-							<button type="button" id="btnChgCmtReg"
-								class="btn btn-info btn-sm">댓글 작성</button>
+						
+						<sec:authorize access="isAuthenticated()" ><%-- 추가: 댓글 작성 버튼, 로그인 사용자일 때만 표시 --%>
+							<button type="button" id="btnChgCmtReg" class="btn btn-info btn-sm">댓글 작성</button>
+						</sec:authorize>
 							<button type="button" id="btnRegCmt"
 								class="btn btn-warning btn-sm" style="display: none">댓글
 								등록</button>
@@ -182,12 +190,14 @@
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<!-- 댓글 입력창 시작 -->
+				<sec:authorize access="isAuthenticated()" ><%-- 추가: 댓글 작성 버튼, 로그인 사용자일 때만 표시 --%>
 					<div class="form-group" style="margin-bottom: 5px;">
 						<textarea class="form-control txtBoxCmt" name="rcontent"
 							placeholder="댓글 작성 시 상대방에 대한 배려와 책임을 담아 주세요.&#10;댓글작성을 원하시면,댓글 작성 버튼을 클릭해주세요."
 							readonly="readonly"></textarea>
 					</div>
 					<hr style="margin-top: 10px; margin-bottom: 10px;">
+					</sec:authorize>
 					<!-- 댓글 입력창 끝 -->
 					<ul class="chat">
 						<!-- 댓글 목록 표시 영역 -->
@@ -274,9 +284,23 @@ $("#btnToList").on("click", function(){
 
 
 <script>
+
+<%-- HTML에서 일어나는 모든 Ajax 전송 요청에 대하여 csrf 토큰값이 요청 헤더에 설정됨 --%>
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+	$(document).ajaxSend(function(e, xhr, options){
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	})
+
+<%--로그인 사용자명 변수에 저장하는 코드는 댓글/답글 자바스크립트 코드 시작 부분으로 이동시킵니다.--%>
+var loginUser = "";
+	<sec:authorize access="isAuthenticated()">
+		loginUser = '<sec:authentication property="principal.username"/>';<%--로그인 사용자명 변수에 저장--%>
+</sec:authorize>
+
+
+
 var bnoValue = '<c:out value="${board.bno}"/>';
-
-
 var commentUL = $(".chat");
 var frmCmtPagingValue = $("#frmCmtPagingValue");
 
@@ -343,18 +367,24 @@ function showCmtList(page){
 						if(replyPagingCreator.replyList[i].lvl > 1) {
 							str += '<small>&nbsp; 답글</small>';
 						}
-							str += '</span>'
+							/*  str += '</span>'
 								+ '<p data-bno = ' + replyPagingCreator.replyList[i].bno
-								+ 'data-rno = ' + replyPagingCreator.replyList[i].rno
-								+ 'data-rwriter = ' + replyPagingCreator.replyList[i].rwriter
-								+ '>'
+								+ ' data-rno = ' + replyPagingCreator.replyList[i].rno
+								+ ' data-rwriter = ' + replyPagingCreator.replyList[i].rwriter 
+								+ '>'  */
+								 str += '</span>'
+			                        + '<p data-bno = ' + replyPagingCreator.replyList[i].bno
+			                        + ' data-rno = ' + replyPagingCreator.replyList[i].rno
+			                        + ' data-rwriter = ' + replyPagingCreator.replyList[i].rwriter
+			                        + '>' 
 								+ replyPagingCreator.replyList[i].rcontent + '</p>'
 								+ '</div>';
-							
+									<sec:authorize access="isAuthenticated()" ><%-- 추가: 답글추가 버튼, 로그인 사용자일 때만 표시 --%>
 							str += '<div class="btnsReply" style="margin-bottom : 10px">'
 								+ '<button type ="button" style="display:in-block" class="btn btn-primary btn-xs btnChgReplyReg"'
 								+ '><span>답글 작성</span></button>'
-								+ '</div>';		
+								+ '</div>';	
+									</sec:authorize>
 							str +=' </div>'
 								+ '</li>';
 					}
@@ -465,9 +495,19 @@ $("#btnCancelRegCmt").on("click", function() {
 	chgBeforeCmtBtn();
 })
 
-//댓글 등록 버튼 클릭 이벤트 처리
+<%-- 아래의 댓글 등록 버튼 클릭 jQuery 실행문 코드를 찾아서 빨간색 코드 추가 --%>
+//댓글등록 버튼 클릭 이벤트 처리
 $("#btnRegCmt").on("click", function() {
-	var loginUser = "user9";
+	// var loginUser = "user9"; 
+	 <%--이 실행문 주석 처리 또는 삭제 후, 아래 빨간색 코드 추가--%>
+	 if(!loginUser){
+		 alert("로그인 후, 등록이 가능합니다.");
+		 return ;
+	 }
+	 console.log("댓글 등록 시 loginUser:" +loginUser);
+	 
+	 
+	 //로그인 유무 검증
 	var txtBoxCmt = $(".txtBoxCmt").val();
 	var comment = {bno : bnoValue, rcontent: txtBoxCmt, rwriter: loginUser};
 	
@@ -522,7 +562,16 @@ $(".chat").on("click", ".commentLi .btnCancelRegReply" ,function(){
 });
 <%--답글 등록 버튼 클릭 이벤트 처리: 답글이 달린 댓글이 있는 페이지 표시--%>
 $(".chat").on("click", ".commentLi .btnRegReply" ,function(){
-	var loginUser = "test8";
+	//var loginUser = "test8";
+	
+	//로그인 유무 검증
+	<%--로그인 안 한 경우--%>
+	if(!loginUser){
+	alert("로그인 후, 답글 등록이 가능합니다.");
+	return ;
+	}
+	console.log("답글 등록 시 loginUser: "+ loginUser);
+	
 	var pageNum = frmCmtPagingValue.find("input[name='pageNum']").val();
 	console.log("답글 추가가 발생된 댓글 페이지 번호: "+ pageNum);
 
@@ -564,6 +613,23 @@ $(".chat").on("click", ".commentLi p", function(){
 	chgBeforeReplyBtn()<%--다른 답글 등록 상태 초기화--%>
 	chgBeforeCmtRepBtns(); <%--다른 답글/댓글 수정 상태 초기화--%>
 	
+	<%--작성자 변수에 저장--%>
+	var rwriter = $(this).data("rwriter");
+	console.log("rwriter: " + rwriter);
+	console.log("loginUser: " + loginUser);
+	
+	<%--로그인 하지 않은 경우--%>
+	if(!loginUser){
+		alret("로그인 후, 수정이 가능합니다");
+		return ;
+	}
+	
+	<%--로그인 계정과 작성자가 다른 경우--%>
+	if(rwriter != loginUser){
+		alert("작성자만 수정 가능합니다");
+		return ;
+	}
+	
 	$(this).parents("li").find(".btnChgReplyReg").attr("style", "display:none");
 
 	var rcontent = $(this).text();
@@ -586,10 +652,28 @@ $(".chat").on("click", ".commentLi .btnCancelCmt", function(){
 	chgBeforeReplyBtn()
 	chgBeforeCmtRepBtns()
 });
+
+
+<%-- 아래의 댓글-답글 수정 버튼 클릭 jQuery 실행문 코드를 찾아서 빨간색 코드 추가 --%>
 <%-- 댓글-답글 수정 처리: 수정 버튼 클릭 이벤트 --%>
 $(".chat").on("click", ".commentLi .btnModCmt", function(){
 <%--작성자 변수에 저장--%>
 	var rwriterVal = $(this).siblings("p").data("rwriter");
+	console.log("rwriterVal:" +rwriterVal);
+	console.log("loginUser:" +loginUser);
+	
+	<%--로그인 안 한 경우--%>
+	if(!loginUser){
+		alert("로그인 후, 수정이 가능합니다.");
+		return;
+	}
+	
+	<%--로그인 계정과 작성자가 다른 경우--%>
+	if(rwriterVal != loginUser){
+		alert("작성자만 수정 가능합니다.");
+		return ;
+	}
+	
 	var pageNum = frmCmtPagingValue.find("input[name='pageNum']").val();
 	
 	console.log("댓글/답글 수정이 발생한 댓글 페이지 번호: "+ pageNum);
@@ -617,8 +701,24 @@ $(".chat").on("click", ".commentLi .btnModCmt", function(){
 
 <%--댓글-답글 삭제 처리: 삭제 버튼 클릭 이벤트 --%>
 $(".chat").on("click", ".commentLi .btnDelCmt", function(){
+	
 	<%--작성자 변수에 저장--%>
 	var rwriterVal = $(this).siblings("p").data("rwriter");
+	console.log("rwriterVal: " + rwriterVal);
+	console.log("loginUser: " + loginUser);
+
+	<%--로그인 하지 않은 경우--%>
+	if(!loginUser){
+	alert("로그인 후, 삭제가 가능합니다.");
+	return ;
+	}
+	
+	<%--로그인 계정과 작성자가 다른 경우--%>
+	if(rwriterVal != loginUser){
+	alert("작성자만 삭제 가능합니다");
+	return ;
+	}
+	
 	var delConfirm = confirm('삭제하시겠습니까?');
 	if(!delConfirm){
 		alert('삭제가 취소되었습니다.');

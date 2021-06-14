@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,12 +65,14 @@ public class MyBoardController {
 	}
 	
 	//게시물 등록 - 페이지 호출
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void showBoardRegisterPage() {
 		log.info("컨트롤러 - 게시물 등록 페이지 호출");
 	}
 	
 	//게시물 등록 - 처리
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String registerNewBoard(MyBoardVO myBoard, RedirectAttributes redirectAttr) {
 		log.info("컨트롤러 : 게시물등록(전달된vo 내용):" +myBoard.toString());
@@ -123,6 +126,7 @@ public class MyBoardController {
 	}
 	
 	//게시물 수정 처리
+	@PreAuthorize("isAuthenticated() && principal.username == #myBoard.bwriter")
 	@PostMapping("/modify")
 	public String modifyBoard(MyBoardVO myBoard, 
 							  MyBoardPagingDTO myBoardPagingDTO, 
@@ -145,8 +149,10 @@ public class MyBoardController {
 	}
 	
 	//게시물 삭제 - 실제 삭제는 아님
+	@PreAuthorize("isAuthenticated() && principal.username == #bwriter")
 	@PostMapping("/delete")
 	public String setBoardDeleted(@RequestParam("bno") Long bno, 
+								 @RequestParam("bwriter") String bwriter,
 								  MyBoardPagingDTO myBoardPagingDTO,
 								  RedirectAttributes redirectAttr) {
 		log.info("컨트롤러 - 게시물 삭제(bdelFlag 값 변경 글 번호) : " + bno);
@@ -165,8 +171,10 @@ public class MyBoardController {
 	}
 	
 	//게시물 삭제 - 특정 게시물 삭제 : 실제 삭제 발생
+	@PreAuthorize("isAuthenticated() && principal.username == #bwriter")
 	@PostMapping("/remove")
 	public String removeBoard(@RequestParam("bno") Long bno,
+							  @RequestParam("bwriter") String bwriter,
 							  MyBoardPagingDTO myBoardPagingDTO,
 							  RedirectAttributes redirectAttr) {
 //		log.info("컨트롤러 - 게시물 삭제 : 삭제되는 글 번호 : " + bno);
