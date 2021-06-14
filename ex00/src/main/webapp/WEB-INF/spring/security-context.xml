@@ -72,7 +72,7 @@ class="com.spring5212.mypro00.common.security.MyNoPwEncryptPasswordEncoder" /> -
 		<!-- Referenced bean 'dataSource' not found 경고는 무시(mybatis-context.xml에 정의되어 있음) -->
 		<security:remember-me data-source-ref="dataSource" remember-me-parameter="remember-me" token-validity-seconds ="604800"/>
 		
-		<security:logout  logout-url="/logout" logout-success-url="/" />
+		<security:logout  logout-url="/logout" logout-success-url="/?logout" />
 		<!-- logout-success-url 속성에 지정되는 URL은 access가 permitAll 로 설정되어야 함 -->
 		
 		

@@ -40,4 +40,12 @@
 </div>
 
 <%-- /.page-wrapper --%>
+
+<%-- 로그아웃으로 홈페이지 이동한 경우에만 실행됨 --%>
+<c:if test="${param.logout != null}">
+	<script type="text/javascript">
+		alert("로그아웃하였습니다.");
+	</script>
+</c:if>
+
 <%@ include file="./myinclude/myfooter.jsp"%>
